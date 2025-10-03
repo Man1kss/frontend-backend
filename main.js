@@ -1,7 +1,7 @@
 const dlg = document.getElementById('contactDialog');
 const openBtn = document.getElementById('openDialog');
 const closeBtn = document.getElementById('closeDialog');
-const forma = document.getElementById('contactForm');
+const form = document.getElementById('contactForm');
 let lastActive = null;
 
 openBtn.addEventListener('click', () => {
@@ -27,23 +27,23 @@ form?.addEventListener('submit', (e) => {
         e.preventDefault();
 
     // Пример: таргетированное сообщение
-    const email = form.elements.email;
-    if (email?.validity.typeMismatch) {
-        email.setCustomValidity('Введите корректный e-mail, например, name@example.com');
- }
-
-    form.reportValidity(); // показать браузерные подсказки
-
-    // A11y: подсветка проблемных полей
-    [...form.elements].forEach(el => {
-    if (el.willValidate) el.toggleAttribute('aria-invalid',
-    !el.checkValidity());
- });
-    return;
+        const email = form.elements.email;
+        if (email?.validity.typeMismatch) {
+            email.setCustomValidity('Введите корректный e-mail, например, name@example.com');
     }
-    // 3) Успешная «отправка» (без сервера)
+
+        form.reportValidity(); // показать браузерные подсказки
+
+        // A11y: подсветка проблемных полей
+        [...form.elements].forEach(el => {
+        if (el.willValidate) el.toggleAttribute('aria-invalid',
+        !el.checkValidity());
+    });
+        return;
+        }
+        // 3) Успешная «отправка» (без сервера)
     e.preventDefault();
-    // Если форма внутри <dialog>, закрываем окно:
+        // Если форма внутри <dialog>, закрываем окно:
     document.getElementById('contactDialog')?.close('success');
     form.reset();
 });
