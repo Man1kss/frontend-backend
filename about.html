@@ -3,43 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> <!-- Скопируйте весь блок <head> из index.html -->
-    <title>О нас - Максончик</title>
+    <title>О нас - Логово</title>
     <meta name="description" content="Узнайте больше о нашей компании и истории">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <a href="/">Максончик</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+    <header class="site-header">
+        <a href="/" class="site-header__brand">Логово</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a href="index.html" class="site-nav__link">Главная</a></li>
+                <li class="site-nav__item"><a href="about.html" class="site-nav__link">О нас</a></li>
+                <li class="site-nav__item"><a href="contacts.html" class="site-nav__link">Контакты</a></li>
             </ul>
-        </nav> <!-- Скопируйте весь блок <header> из index.html -->
-    </header>
-    <main>
-        <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>О нас</span>
         </nav>
-        <h1>О нашей компании</h1>
-        <section>
-            <h2>Наша история</h2>
-            <p>Всё начиналось с подвала в подмосковье...</p>
+    </header>
+
+    <main class="main">
+        <!-- Простые "хлебные крошки" -->
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="index.html" class="breadcrumbs__link">Главная</a> -
+            <span class="breadcrumbs__current">О нас</span>
+        </nav>
+
+        <h1 class="main__title">О нашей компании</h1>
+        
+        <section class="section">
+            <h2 class="section__title">Наша история</h2>
+            <p class="section__text">Всё начиналось с подвала в подмосковье...</p>
         </section>
-        <section>
-            <h2>Наша команда</h2>
-            <p>В команду входят 2 человека: Максим и Тайлер Дерден</p>
+        
+        <section class="section">
+            <h2 class="section__title">Наша команда</h2>
+            <p class="section__text">Главный разработчик - Баскаков Максим Станиславович</p>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2025 Максончик. Все права защищены.</p>
-        <p>Телефон: +7 (925) 200-69-27</p> <!-- Скопируйте весь блок <footer> из index.html -->
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Логово. Все права защищены.</p>
+        <p>Телефон: +7 (925) 200-69-27</p>
     </footer>
+
+    <script src="main.js" defer></script>
 </body>
 </html>

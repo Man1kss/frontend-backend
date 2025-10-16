@@ -3,47 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon"> <!-- Скопируйте весь блок <head> из index.html -->
-    <title>Контакты - Максончик</title>
-    <meta name="description" content="Наши контакты">
+    <title>Контакты - Логово</title>
+    <meta name="description" content="Свяжитесь с нами для сотрудничества">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js" defer></script>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <header>
-        <a href="/">Максончик</a>
-        <!-- Главное меню навигации -->
-        <nav>
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contacts.html">Контакты</a></li>
+    <header class="site-header">
+        <a href="/" class="site-header__brand">Логово</a>
+        <nav class="site-nav" aria-label="Основная навигация">
+            <ul class="site-nav__list">
+                <li class="site-nav__item"><a href="index.html" class="site-nav__link">Главная</a></li>
+                <li class="site-nav__item"><a href="about.html" class="site-nav__link">О нас</a></li>
+                <li class="site-nav__item"><a href="contacts.html" class="site-nav__link">Контакты</a></li>
+                <li class="site-nav__item">
+                    <button id="openDialog" type="button" class="button">Написать нам</button>
+                </li>
             </ul>
-        </nav> <!-- Скопируйте весь блок <header> из index.html -->
-    </header>
-    <main>
-        <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>Контакты</span>
         </nav>
-        <h1>Контактные данные</h1>
-        <section>
-            <h2>Владелец</h2>
-            <p>Баскаков Максим Станиславович +7 (925) 200-69-27</p>
+    </header>
+
+    <main class="main">
+        <!-- Простые "хлебные крошки" -->
+        <nav class="breadcrumbs" aria-label="Хлебные крошки">
+            <a href="index.html" class="breadcrumbs__link">Главная</a> -
+            <span class="breadcrumbs__current">Контакты</span>
+        </nav>
+
+        <h1 class="main__title">Контакты</h1>
+        
+        <section class="section">
+            <h2 class="section__title">Наши контакты</h2>
+            <p class="section__text">Адрес: г. Москва, ул. Профсоюзная, д. 140к5</p>
+            <p class="section__text">Телефон: +7 (925) 200-69-27</p>
+            <p class="section__text">Email: man1kss@mail.ru</p>
         </section>
-        <section>
-            <h2>Главный разработчик</h2>
-            <p>Баскаков Максим Станиславович +7 (925) 200-69-27</p>
-        </section>
-        <section>
-            <h3>Дизайнер</h3>
-            <p>Тайлер Дерден *засекреченная информация*</p>
-        </section>
-    </main
-    <footer>
-        <p>&copy; 2025 Максончик. Все права защищены.</p>
-        <p>Телефон: +7 (925) 200-69-27</p> <!-- Скопируйте весь блок <footer> из index.html -->
+    </main>
+
+    <!-- Модалка с формой -->
+    <dialog id="contactDialog" class="modal" aria-labelledby="dialogTitle">
+        <h2 id="dialogTitle" class="modal__title">Обратная связь</h2>
+
+        <form id="contactForm" class="form" method="dialog" novalidate>
+            <div class="form__field">
+                <label for="name" class="form__label">Имя</label>
+                <input id="name" name="name" type="text" required minlength="2" autocomplete="given-name" class="form__input">
+            </div>
+
+            <div class="form__field">
+                <label for="email" class="form__label">E-mail</label>
+                <input id="email" name="email" type="email" required autocomplete="email" class="form__input">
+            </div>
+
+            <div class="form__field">
+                <label for="phone" class="form__label">Телефон</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                    aria-describedby="phoneHelp" placeholder="+7 (___) ___-__-__"
+                    required pattern="^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$" class="form__input">
+                <small id="phoneHelp" class="form__help">Формат: +7 (900) 000-00-00</small>
+            </div>
+
+            <div class="form__field">
+                <label for="date" class="form__label">Дата</label>
+                <input id="date" name="date" type="date" class="form__input">
+            </div>
+
+            <div class="form__field">
+                <label for="topic" class="form__label">Тема</label>
+                <select id="topic" name="topic" required class="form__select">
+                    <option value="">Выберите тему</option>
+                    <option>Вопрос</option>
+                    <option>Заказ</option>
+                </select>
+            </div>
+
+            <div class="form__field">
+                <label for="message" class="form__label">Сообщение</label>
+                <textarea id="message" name="message" rows="4" required class="form__textarea"></textarea>
+            </div>
+
+            <div class="form__actions">
+                <button type="button" id="closeDialog" class="button button--secondary">Закрыть</button>
+                <button type="submit" class="button">Отправить</button>
+            </div>
+        </form>
+    </dialog>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Логово. Все права защищены.</p>
+        <p>Телефон: +7 (925) 200-69-27</p>
     </footer>
+
+    <script src="main.js" defer></script>
 </body>
 </html>
