@@ -1,0 +1,32 @@
+/* Практика №12 - Bootstrap 5 (минимальные кастомные стили) */
+:root {
+    --bs-primary-rgb: 102, 126, 234;
+}
+
+.card { border-radius: var(--bs-card-border-radius-lg); transition: var(--transition); }
+.card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important; }
+.progress { border-radius: 4px; }
+.badge { font-size: 0.75em; }
+.navbar-nav .nav-link { transition: var(--transition); }
+.navbar-nav .nav-link:hover { transform: translateY(-1px); }
+
+.nav-link.active { 
+    background-color: rgba(255,255,255,0.1) !important;
+    border-radius: 6px;
+}
+
+/* Кастомизация модальных окон для Bootstrap */
+.modal-content {
+    border-radius: 12px; border: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.modal-header {
+    background: linear-gradient(135deg, var(--color-main) 0%, var(--color-dark) 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .card-body { padding: 1.25rem; }
+    .navbar-nav { text-align: center; }
+}

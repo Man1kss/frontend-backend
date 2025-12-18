@@ -3,108 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная - Логово</title>
-    <meta name="description" content="Краткое описание главной страницы вашего сайта">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>Портфолио - Максим Баскаков</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
-<body>
-    <!-- Шапка сайта -->
-    <header class="site-header">
-        <a href="/" class="site-header__brand">Логово</a>
-        <!-- Главное меню навигации -->
-        <nav class="site-nav" aria-label="Основная навигация">
-            <ul class="site-nav__list">
-                <li class="site-nav__item"><a href="index.html" class="site-nav__link">Главная</a></li>
-                <li class="site-nav__item"><a href="about.html" class="site-nav__link">О нас</a></li>
-                <li class="site-nav__item"><a href="contacts.html" class="site-nav__link">Контакты</a></li>
-                <li class="site-nav__item"><a href="#contacts" class="site-nav__link site-nav__link--cta">Связаться</a></li>
-            </ul>
+<body class="bg-light">
+    <div class="container-fluid p-0">
+        <!-- Header -->
+        <header class="bg-primary text-white py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-4 fw-bold mb-3">Баскаков Максим Станиславович</h1>
+                        <p class="lead opacity-90 mb-4">Фуллстек‑разработчик</p>
+                        <p class="fs-5 text-white-50 mb-0">
+                            Специалист по HTML, CSS, JavaScript, Bootstrap и современным веб-технологиям
+                        </p>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end">
+                        <span class="badge bg-light text-primary fs-5 px-3 py-2 mb-3 d-inline-block">Группа ЭФБО‑06‑24</span>
+                        <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
+                            <a href="pages/contacts.html" class="btn btn-light btn-lg">
+                                <i class="bi bi-envelope me-2"></i>Связаться
+                            </a>
+                            <a href="pages/goods.html" class="btn btn-outline-light btn-lg">
+                                <i class="bi bi-cart me-2"></i>Магазин
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="top: 0; z-index: 1000;">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html"><i class="bi bi-house me-1"></i>Главная</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/news.html"><i class="bi bi-newspaper me-1"></i>Новости</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/practices.html"><i class="bi bi-code-slash me-1"></i>Практики</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/goods.html"><i class="bi bi-cart me-1"></i>Товары</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/contacts.html"><i class="bi bi-telephone me-1"></i>Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-    </header>
 
-    <!-- Уникальное основное содержимое страницы -->
-    <main class="main">
-        <h1 class="main__title">Добро пожаловать на наш сайт!</h1>
+        <!-- Main Content -->
+        <main class="container my-5">
+            <!-- Profile Section -->
+            <section class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100 text-center">
+                        <div class="card-body py-5">
+                            <div class="mb-4">
+                                <img src="images/avatar.png" alt="Фото" class="rounded-circle img-fluid shadow-lg" 
+                                     style="width: 180px; height: 180px; object-fit: cover;">
+                            </div>
+                            <h2 class="h4 mb-3 text-primary">Баскаков Максим Станиславович</h2>
+                            <p class="text-muted mb-4 fs-6">Группа ЭФБО‑06‑24</p>
+                            <div class="d-flex flex-column gap-2 mb-4">
+                                <span class="badge bg-primary fs-6 w-100 py-2">10+ проектов</span>
+                                <span class="badge bg-success fs-6 w-100 py-2">Адаптивная верстка</span>
+                                <span class="badge bg-info text-white fs-6 w-100 py-2">Frontend</span>
+                            </div>
+                            <a href="pages/contacts.html" class="btn btn-primary btn-lg w-100 mb-2">
+                                <i class="bi bi-chat-dots me-2"></i>Написать
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Секция 1 с якорем -->
-        <section id="services" class="section">
-            <h2 class="section__title">Наши услуги</h2>
-            <p class="section__text">Буст на фейсите</p>
-            <p class="section__text">Буст в Rocket League</p>
-            <p class="section__text">Кровавые облигации в Hunt: Showdown</p>
-            <a href="#contacts" class="button">Связаться с нами</a>
-        </section>
+                <div class="col-lg-8">
+                    <!-- About -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title h5 mb-0">
+                                <i class="bi bi-person-circle text-primary me-2"></i>О себе
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="lead mb-4">
+                                Фуллстек‑разработчик и студент группы ЭФБО‑06‑24, совмещающий учебу и практические проекты.
+                            </p>
+                            <p>
+                            Увлекаюсь веб‑разработкой: верстаю адаптивные интерфейсы на HTML и CSS, пишу интерактив на JavaScript,
+                            работаю с базами данных и SQL. Постоянно дорабатываю личные проекты и учебные практики.
+                            </p>
+                            <p class="text-muted">
+                                Интересуюсь гейм‑дизайном и соревновательными играми, что помогает смотреть на интерфейсы
+                                и пользовательский опыт глазами реального игрока.
+                            </p>
+                        </div>
+                    </div>
 
-        <!-- Секция 2 с якорем -->
-        <section id="portfolio" class="section">
-            <h2 class="section__title">Портфолио</h2>
-            <p class="section__text">Примеры наших работ:</p>
-            <h3 class="section__title"> Буст на фейсите</h3>
-            <div class="portfolio-item">
-                <img
-                    src="assets/images/content/faceit.jpg"
-                    alt="Буст на фейсите"
-                    width="299"
-                    height="168"
-                    >
+                    <!-- Skills -->
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title h5 mb-0">
+                                <i class="bi bi-tools text-primary me-2"></i>Навыки
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">HTML</span>
+                                            <span class="text-primary">54%</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar bg-primary" style="width: 54%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">CSS</span>
+                                            <span class="text-success">46%</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar bg-success" style="width: 46%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">JavaScript</span>
+                                            <span class="text-info">34%</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar bg-info" style="width: 34%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span class="fw-semibold">SQL</span>
+                                            <span class="text-warning">68%</span>
+                                        </div>
+                                        <div class="progress" style="height: 10px;">
+                                            <div class="progress-bar bg-warning" style="width: 68%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 mt-4">
+                                <span class="badge bg-primary">HTML</span>
+                                <span class="badge bg-success">CSS</span>
+                                <span class="badge bg-info text-white">JavaScript</span>
+                                <span class="badge bg-warning text-dark">SQL</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>Довольные клиенты</p>
-            <h4 class="section__title">Пример моей отыгровки на турнире</h4>
-            <div class="media-container">
-                <iframe src="https://youtube.com/embed/edP-oCWzYXA"
-                    title="Описание видео"
-                    allowfullscreen
-                    loading="lazy">
-                </iframe>
+
+            <!-- Quick Links -->
+            <section class="row g-4 text-center">
+                <div class="col-md-3">
+                    <a href="pages/practices.html" class="card shadow-sm h-100 text-decoration-none">
+                        <div class="card-body py-5">
+                            <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
+                            <h5 class="card-title">Практики</h5>
+                            <p class="text-muted">3 выполненных заданий</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="pages/news.html" class="card shadow-sm h-100 text-decoration-none">
+                        <div class="card-body py-5">
+                            <i class="bi bi-newspaper display-4 text-success mb-3"></i>
+                            <h5 class="card-title">Новости</h5>
+                            <p class="text-muted">Последние обновления</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="pages/goods.html" class="card shadow-sm h-100 text-decoration-none">
+                        <div class="card-body py-5">
+                            <i class="bi bi-cart display-4 text-info mb-3"></i>
+                            <h5 class="card-title">Магазин</h5>
+                            <p class="text-muted">Цифровые продукты</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="pages/contacts.html" class="card shadow-sm h-100 text-decoration-none">
+                        <div class="card-body py-5">
+                            <i class="bi bi-telephone display-4 text-warning mb-3"></i>
+                            <h5 class="card-title">Контакты</h5>
+                            <p class="text-muted">Написать мне</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-light py-3 mt-auto">
+            <div class="container d-flex flex-wrap justify-content-between align-items-center">
+                <span class="small">
+                    © 2025 Баскаков Максим Станиславович, группа ЭФБО‑06‑24
+                </span>
+                <div class="d-flex gap-3 small">
+                    <a href="contacts.html" class="link-light text-decoration-none">Контакты</a>
+                    <a href="https://github.com/" class="link-light text-decoration-none" target="_blank">GitHub</a>
+                </div>
             </div>
-            <h3 class="section__title">Кровавые облигации</h3>
-            <div class="portfolio-item">
-                <img
-                    src="assets/images/content/hunt.jpg"
-                    alt="Буст на фейсите"
-                    width="299"
-                    height="168"
-                    >
-            </div>
-            <p>Много облигаций</p>
-        </section>
+        </footer>
+    </div>
 
-        <!-- Секция 3 с якорем -->
-        <section id="contacts" class="section">
-            <h2 class="section__title">Контактная информация</h2>
-            <p class="section__text">Максим +7(925) 200-69-27</p>
-            <a href="contacts.html" class="button">Подробнее</a>
-        </section>
-    </main>
-
-    <!-- Подвал сайта -->
-    <footer class="site-footer">
-        <p>&copy; 2025 Логово. Все права защищены.</p>
-        <p>Телефон: +7 (925) 200-69-27</p>
-    </footer>
-
-    <script src="main.js" defer></script>
-
-    <button class="theme-toggle" type="button" aria-pressed="false">Тема</button>
-
-    <script>
-    const KEY = 'theme';
-    const btn = document.querySelector('.theme-toggle');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Автовыбор темы
-    if (localStorage.getItem(KEY) === 'dark' || (!localStorage.getItem(KEY) && prefersDark)) {
-        document.body.classList.add('theme-dark');
-        btn?.setAttribute('aria-pressed', 'true');
-        }
-
-    // Переключение по кнопке
-    btn?.addEventListener('click', () => {
-        const isDark = document.body.classList.toggle('theme-dark');
-        btn.setAttribute('aria-pressed', String(isDark));
-        localStorage.setItem(KEY, isDark ? 'dark' : 'light');
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>
