@@ -13,7 +13,7 @@ class PortfolioApp {
         this.initModals();
     }
 
-    // 1. АКТИВНАЯ НАВИГАЦИЯ
+    // АКТИВНАЯ НАВИГАЦИЯ
     initNavigation() {
         document.querySelectorAll('.nav-link, .navbar-nav .nav-link').forEach(link => {
             link.addEventListener('click', () => {
@@ -31,7 +31,7 @@ class PortfolioApp {
         });
     }
 
-    // 2. КОРЗИНА
+    // КОРЗИНА
     initCart() {
         document.querySelectorAll('.add-to-cart, .btn-cart').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -74,7 +74,7 @@ class PortfolioApp {
         if (priceEl) priceEl.textContent = totalPrice + '₽';
     }
 
-    // 3. ФОРМЫ + МАСКА ТЕЛЕФОНА
+    // ФОРМЫ + МАСКА ТЕЛЕФОНА
     initForms() {
         document.querySelectorAll('input[type="tel"], #phone').forEach(input => {
             input.addEventListener('input', this.formatPhone);
@@ -118,7 +118,7 @@ class PortfolioApp {
         modal?.close?.();
     }
 
-    // 4. МОДАЛЬНЫЕ ОКНА
+    // МОДАЛЬНЫЕ ОКНА
     initModals() {
         document.querySelectorAll('dialog').forEach(modal => {
             modal.addEventListener('click', (e) => {
@@ -134,7 +134,7 @@ class PortfolioApp {
         });
     }
 
-    // 5. ТЕМНАЯ ТЕМА
+    // ТЕМНАЯ ТЕМА
     initTheme() {
         if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('theme-dark');
@@ -149,7 +149,7 @@ class PortfolioApp {
         });
     }
 
-    // 6. SMOOTH SCROLL
+    // SMOOTH SCROLL
     initSmoothScroll() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
