@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Проекты - Баскаков Максим | Морская тема</title>
+    
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preload" href="../style/ocean-theme.css" as="style">
+    <link rel="preload" href="../js/aqua-engine.js" as="script">
+    
+    <!-- Оптимизация загрузки -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    
+    <!-- Основные стили морской темы -->
+    <link rel="stylesheet" href="../style/ocean-theme.css">
+    <link rel="stylesheet" href="../style/animations.css">
+    
+    <!-- Мета-теги -->
+    <meta name="description" content="Портфолио проектов ва Алексея - коллекция работ в веб-разработке с морской тематикой">
+    <meta name="keywords" content="веб-разработка, проекты, портфолио, морская тема">
+    
+    <style>
+        /* Стили для модальных окон */
+        .modal {
+            z-index: 1060;
+        }
+        
+        .modal-backdrop {
+            z-index: 1055;
+        }
+        
+        /* Улучшение видимости модальных окон */
+        .ocean-modal .modal-content {
+            background: rgba(3, 4, 94, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 255, 234, 0.4);
+            box-shadow: 0 0 50px rgba(0, 255, 234, 0.3);
+        }
+
+        /* Анимация для водных эффектов */
+        @keyframes waterRipple {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Стили для курсора */
+        .aqua-cursor {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, rgba(0,255,234,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            animation: cursorPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes cursorPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="ocean-theme">
+    <!-- Анимированный океанский фон -->
+    <div class="ocean-background">
+        <div class="waves-container">
+            <div class="wave wave-1"></div>
+            <div class="wave wave-2"></div>
+            <div class="wave wave-3"></div>
+            <div class="bubbles-container"></div>
+        </div>
+        <canvas id="liquidCanvas" class="liquid-canvas"></canvas>
+    </div>
+
+    <!-- Свечение за курсором -->
+    <div id="cursorGlow" class="aqua-cursor"></div>
+
+    <!-- Уведомления в морском стиле -->
+    <div id="notificationContainer" class="ocean-notifications"></div>
+
+    <!-- Плавающие частицы -->
+    <div class="floating-particles">
+        <div class="particle bubble-1"></div>
+        <div class="particle bubble-2"></div>
+        <div class="particle bubble-3"></div>
+        <div class="particle seaweed-1"></div>
+        <div class="particle seaweed-2"></div>
+    </div>
+
+    <!-- Skip-link для доступности -->
+    <a class="skip-link ocean-skip" href="#main">Перейти к основному содержимому</a>
+
+    <!-- Основной контейнер с стеклянным эффектом -->
+    <div class="glass-container">
+        <header class="ocean-header">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-center py-3">
+                    <!-- Анимированный логотип с водой -->
+                    <div class="logo-container me-3">
+                        <div class="water-logo">
+                            <svg width="40" height="40" viewBox="0 0 40 40" class="logo-wave">
+                                <path d="M20,5 C25,5 35,10 35,20 C35,30 25,35 20,35 C15,35 5,30 5,20 C5,10 15,5 20,5 Z" 
+                                      fill="url(#waterGradient)"/>
+                                <defs>
+                                    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00b4d8"/>
+                                        <stop offset="50%" stop-color="#0077b6"/>
+                                        <stop offset="100%" stop-color="#03045e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="h3 mb-0 text-glow">Баскаков Максим</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Навигация с водным эффектом -->
+        <nav class="navbar navbar-expand-lg ocean-navbar" aria-label="Основная навигация">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold text-glow water-text" href="../index.html">
+                    <i class="bi bi-droplet-half me-2"></i>Portfolio
+                </a>
+                <button class="navbar-toggler ocean-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav"
+                        aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon">
+                        <i class="bi bi-water"></i>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="../index.html">
+                                <i class="bi bi-house-water me-1"></i>Главная
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active water-link" href="projects.html" aria-current="page">
+                                <i class="bi bi-folder-symlink me-1"></i>Проекты
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="diary.html">
+                                <i class="bi bi-journal-text me-1"></i>Дневник
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="contacts.html">
+                                <i class="bi bi-telephone-outbound me-1"></i>Контакты
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main" class="container-fluid my-5">
+            <!-- Заголовок страницы -->
+            <header class="mb-5 text-center">
+                <h1 class="text-glow mb-3">
+                    <i class="bi bi-folder-fill me-2 water-icon"></i>Мои проекты
+                </h1>
+                <p class="ocean-text lead mb-4">
+                    Коллекция моих работ, демонстрирующих различные навыки веб-разработки
+                </p>
+                
+                <!-- Статистика проектов -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-8">
+                        <div class="card ocean-glass aqua-card">
+                            <div class="card-body">
+                                <div class="row text-center">
+                                    <div class="col-md-3 mb-3">
+                                        <div class="aqua-gradient fw-bold display-6">6+</div>
+                                        <p class="ocean-text mb-0">Завершенных проектов</p>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="aqua-gradient fw-bold display-6">10+</div>
+                                        <p class="ocean-text mb-0">Изученных технологий</p>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="aqua-gradient fw-bold display-6">500+</div>
+                                        <p class="ocean-text mb-0">Часов разработки</p>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="aqua-gradient fw-bold display-6">∞</div>
+                                        <p class="ocean-text mb-0">Стремление к совершенству</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Фильтры проектов -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card ocean-glass aqua-card">
+                        <div class="card-body">
+                            <h3 class="h5 text-glow mb-3 text-center">
+                                <i class="bi bi-funnel me-2 water-icon"></i>Фильтры проектов
+                            </h3>
+                            <div class="d-flex justify-content-center flex-wrap gap-2" id="filterButtons">
+                                <button class="btn aqua-btn filter-btn active" data-filter="all">
+                                    <i class="bi bi-grid me-2"></i>Все проекты
+                                </button>
+                                <button class="btn ocean-outline-btn filter-btn" data-filter="html">
+                                    <i class="bi bi-filetype-html me-2"></i>HTML/CSS
+                                </button>
+                                <button class="btn ocean-outline-btn filter-btn" data-filter="js">
+                                    <i class="bi bi-filetype-js me-2"></i>JavaScript
+                                </button>
+                                <button class="btn ocean-outline-btn filter-btn" data-filter="react">
+                                    <i class="bi bi-react me-2"></i>React
+                                </button>
+                                <button class="btn ocean-outline-btn filter-btn" data-filter="fullstack">
+                                    <i class="bi bi-layers me-2"></i>FullStack
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сетка проектов -->
+            <div class="row g-4" id="projectsGrid">
+                <!-- Project 1 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="html" id="project1">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project1.jpg" class="card-img-top project-image" alt="Личный сайт" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/0077b6/ffffff?text=Проект+1'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-globe2 water-icon me-2"></i>Личный сайт
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Адаптивный сайт-портфолио с современным дизайном и анимациями
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge aqua-badge">HTML5</span>
+                                    <span class="badge ocean-badge">CSS3</span>
+                                    <span class="badge aqua-badge">Bootstrap</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal1">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="js" id="project2">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project2.jpg" class="card-img-top project-image" alt="Todo приложение" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/00b4d8/ffffff?text=Проект+2'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-list-check water-icon me-2"></i>Todo-приложение
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Функциональное приложение для управления задачами с сохранением данных
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge ocean-badge">JavaScript</span>
+                                    <span class="badge aqua-badge">Local Storage</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal2">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="react" id="project3">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project3.jpg" class="card-img-top project-image" alt="Интернет-магазин" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/0096c7/ffffff?text=Проект+3'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-shop water-icon me-2"></i>Интернет-магазин
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Полнофункциональный e-commerce магазин на React с корзиной и фильтрами
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge aqua-badge">React</span>
+                                    <span class="badge ocean-badge">REST API</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal3">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="html" id="project4">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project4.jpg" class="card-img-top project-image" alt="Портфолио" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/48cae4/ffffff?text=Проект+4'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-person-badge water-icon me-2"></i>Портфолио
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Профессиональное портфолио с плавными анимациями и современным UI
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge aqua-badge">Bootstrap</span>
+                                    <span class="badge ocean-badge">Responsive</span>
+                                    <span class="badge aqua-badge">Animations</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal4">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="js" id="project5">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project5.jpg" class="card-img-top project-image" alt="Weather App" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/90e0ef/ffffff?text=Проект+5'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-cloud-sun water-icon me-2"></i>Weather App
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Приложение прогноза погоды с интеграцией внешнего API и геолокацией
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge ocean-badge">JavaScript</span>
+                                    <span class="badge aqua-badge">Weather API</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal5">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="col-lg-4 col-md-6 project-item" data-category="react fullstack" id="project6">
+                    <article class="card ocean-glass aqua-card h-100 project-card">
+                        <div class="project-image-container">
+                            <img src="../images/project6.jpg" class="card-img-top project-image" alt="Task Manager" 
+                                 onerror="this.src='https://via.placeholder.com/400x220/caf0f8/ffffff?text=Проект+6'" loading="lazy">
+                            <div class="water-overlay"></div>
+                            <div class="project-hover-content">
+                                <i class="bi bi-eye-fill water-icon"></i>
+                                <span>Посмотреть детали</span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h3 class="card-title h5 text-glow mb-2">
+                                <i class="bi bi-kanban water-icon me-2"></i>Task Manager
+                            </h3>
+                            <p class="card-text ocean-text small flex-grow-1">
+                                Система управления проектами с досками задач в стиле Kanban
+                            </p>
+                            <div class="mt-auto">
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="badge aqua-badge">React</span>
+                                    <span class="badge ocean-badge">Context API</span>
+                                    <span class="badge aqua-badge">Drag & Drop</span>
+                                </div>
+                                <button class="btn ocean-outline-btn w-100 project-detail-btn" data-bs-toggle="modal" data-bs-target="#projectModal6">
+                                    <i class="bi bi-info-circle me-2"></i>Подробнее
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Призыв к действию -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card ocean-glass aqua-card text-center">
+                        <div class="card-body py-5">
+                            <h2 class="text-glow mb-3">
+                                <i class="bi bi-rocket-takeoff water-icon me-2"></i>Готов к новым вызовам!
+                            </h2>
+                            <p class="ocean-text lead mb-4">
+                                Заинтересованы в сотрудничестве или хотите обсудить проект?
+                            </p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                <a href="contacts.html" class="btn aqua-btn btn-lg">
+                                    <i class="bi bi-envelope me-2"></i>Связаться со мной
+                                </a>
+                                <a href="../index.html" class="btn ocean-outline-btn btn-lg">
+                                    <i class="bi bi-person me-2"></i>Узнать больше
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="ocean-footer text-center py-4">
+            <div class="container-fluid">
+                <p class="mb-2 text-glow">© 2025 Баскаков Максим | ЭФБО-06-24</p>
+                <p class="small mb-0 ocean-text">
+                    <i class="bi bi-droplet-fill text-info me-1"></i>
+                    Сделано с любовью к океану и коду
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальные окна -->
+    <!-- Modal 1: Личный сайт -->
+    <div class="modal fade ocean-modal" id="projectModal1" tabindex="-1" aria-labelledby="projectModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content ocean-glass aqua-card">
+                <div class="modal-header ocean-border">
+                    <h5 class="modal-title text-glow" id="projectModal1Label">
+                        <i class="bi bi-globe2 me-2 water-icon"></i>Личный сайт-портфолио
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="project-modal-image mb-4">
+                        <img src="../images/project1.jpg" class="img-fluid rounded" alt="Личный сайт" 
+                             onerror="this.src='https://via.placeholder.com/800x400/0077b6/ffffff?text=Проект+1'" loading="lazy">
+                    </div>
+                    <h6 class="aqua-gradient mb-3"><i class="bi bi-info-circle me-2"></i>Описание проекта:</h6>
+                    <p class="ocean-text">
+                        Адаптивный личный сайт-портфолио, разработанный с использованием современных технологий веб-разработки. 
+                        Проект демонстрирует навыки работы с HTML5, CSS3 и Bootstrap для создания отзывчивого дизайна.
+                    </p>
+                    <div class="mt-4 d-flex gap-2 flex-wrap">
+                        <a href="#" class="btn aqua-btn">
+                            <i class="bi bi-box-arrow-up-right me-2"></i>Живая версия
+                        </a>
+                        <a href="https://github.com/Man1kss" target="_blank" class="btn ocean-outline-btn">
+                            <i class="bi bi-github me-2"></i>Исходный код
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Todo-приложение -->
+    <div class="modal fade ocean-modal" id="projectModal2" tabindex="-1" aria-labelledby="projectModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content ocean-glass aqua-card">
+                <div class="modal-header ocean-border">
+                    <h5 class="modal-title text-glow" id="projectModal2Label">
+                        <i class="bi bi-list-check me-2 water-icon"></i>Todo-приложение для управления задачами
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="project-modal-image mb-4">
+                        <img src="../images/project2.jpg" class="img-fluid rounded" alt="Todo приложение" 
+                             onerror="this.src='https://via.placeholder.com/800x400/00b4d8/ffffff?text=Проект+2'" loading="lazy">
+                    </div>
+                    <h6 class="aqua-gradient mb-3"><i class="bi bi-info-circle me-2"></i>Описание проекта:</h6>
+                    <p class="ocean-text">
+                        Функциональное приложение для управления задачами с возможностью добавления, редактирования, 
+                        удаления и фильтрации задач. Использует Local Storage для сохранения данных между сеансами работы.
+                    </p>
+                    <div class="mt-4 d-flex gap-2 flex-wrap">
+                        <a href="#" class="btn aqua-btn">
+                            <i class="bi bi-box-arrow-up-right me-2"></i>Попробовать
+                        </a>
+                        <a href="https://github.com/Man1kss" target="_blank" class="btn ocean-outline-btn">
+                            <i class="bi bi-github me-2"></i>Код на GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Добавьте остальные модальные окна по аналогии -->
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="../js/aqua-engine.js" defer></script>
+    <script src="../js/liquid-canvas.js" defer></script>
+    <script src="../js/water-animations.js" defer></script>
+    <script src="../js/ocean-interactions.js" defer></script>
+    <script src="../js/notifications.js" defer></script>
+    
+    <!-- Восстановленный JavaScript с водными эффектами -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Страница проектов загружена - полная версия с эффектами');
+            
+            // Инициализация водных эффектов
+            initWaterEffects();
+            
+            // Инициализация фильтров проектов
+            initProjectsFilter();
+            
+            // Инициализация интерактивных эффектов
+            initProjectInteractions();
+            
+            // Инициализация курсора
+            initCursorEffects();
+        });
+
+        function initWaterEffects() {
+            // Инициализация водного движка если он доступен
+            if (typeof AquaEngine !== 'undefined') {
+                AquaEngine.init();
+                console.log('AquaEngine инициализирован');
+            }
+            
+            // Инициализация жидкого канваса
+            if (typeof LiquidCanvas !== 'undefined') {
+                LiquidCanvas.init();
+                console.log('LiquidCanvas инициализирован');
+            }
+        }
+
+        function initCursorEffects() {
+            const cursor = document.getElementById('cursorGlow');
+            if (!cursor) return;
+
+            document.addEventListener('mousemove', function(e) {
+                cursor.style.left = (e.clientX - 20) + 'px';
+                cursor.style.top = (e.clientY - 20) + 'px';
+                
+                // Создаем след из пузырьков
+                if (Math.random() > 0.7) {
+                    createBubble(e.clientX, e.clientY);
+                }
+            });
+
+            // Эффекты при клике
+            document.addEventListener('click', function(e) {
+                createWaterRipple(e.clientX, e.clientY);
+                
+                // Дополнительные эффекты для интерактивных элементов
+                if (e.target.classList.contains('btn') || 
+                    e.target.classList.contains('filter-btn') ||
+                    e.target.classList.contains('project-detail-btn')) {
+                    createSplashEffect(e.clientX, e.clientY);
+                }
+            });
+        }
+
+        function createBubble(x, y) {
+            const bubble = document.createElement('div');
+            bubble.style.cssText = `
+                position: fixed;
+                width: ${Math.random() * 10 + 5}px;
+                height: ${Math.random() * 10 + 5}px;
+                background: radial-gradient(circle, rgba(0,255,234,0.3) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${x}px;
+                top: ${y}px;
+                animation: bubbleFloat ${Math.random() * 2 + 1}s ease-out forwards;
+            `;
+            
+            document.body.appendChild(bubble);
+            
+            setTimeout(() => {
+                bubble.remove();
+            }, 2000);
+        }
+
+        function createWaterRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: fixed;
+                width: 100px;
+                height: 100px;
+                background: radial-gradient(circle, rgba(0,255,234,0.3) 0%, transparent 70%);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                left: ${x - 50}px;
+                top: ${y - 50}px;
+                animation: waterRipple 0.6s ease-out forwards;
+            `;
+            
+            document.body.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        function createSplashEffect(x, y) {
+            // Создаем несколько брызг
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const splash = document.createElement('div');
+                    const size = Math.random() * 30 + 20;
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 50 + 30;
+                    
+                    splash.style.cssText = `
+                        position: fixed;
+                        width: ${size}px;
+                        height: ${size}px;
+                        background: radial-gradient(circle, rgba(0,255,234,0.4) 0%, transparent 70%);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 10000;
+                        left: ${x - size/2 + Math.cos(angle) * distance}px;
+                        top: ${y - size/2 + Math.sin(angle) * distance}px;
+                        animation: splashEffect 0.8s ease-out forwards;
+                    `;
+                    
+                    document.body.appendChild(splash);
+                    
+                    setTimeout(() => {
+                        splash.remove();
+                    }, 800);
+                }, i * 100);
+            }
+        }
+
+        function initProjectsFilter() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectItems = document.querySelectorAll('.project-item');
+            
+            console.log('Найдено фильтров:', filterBtns.length);
+            console.log('Найдено проектов:', projectItems.length);
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Клик по фильтру:', this.dataset.filter);
+                    
+                    // Убираем активный класс у всех кнопок
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'aqua-btn');
+                        b.classList.add('ocean-outline-btn');
+                    });
+                    
+                    // Добавляем активный класс текущей кнопке
+                    this.classList.add('active', 'aqua-btn');
+                    this.classList.remove('ocean-outline-btn');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Фильтруем проекты
+                    projectItems.forEach(item => {
+                        const categories = item.getAttribute('data-category');
+                        const shouldShow = filter === 'all' || categories.includes(filter);
+                        
+                        if (shouldShow) {
+                            item.style.display = 'block';
+                            // Анимация появления
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                                item.style.animation = 'fadeInUp 0.6s ease forwards';
+                            }, 50);
+                        } else {
+                            // Анимация скрытия
+                            item.style.animation = 'fadeOut 0.4s ease forwards';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 400);
+                        }
+                    });
+
+                    // Водный эффект
+                    const rect = this.getBoundingClientRect();
+                    createSplashEffect(rect.left + rect.width/2, rect.top + rect.height/2);
+                });
+            });
+        }
+
+        function initProjectInteractions() {
+            // Эффекты для карточек проектов
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                    this.style.transition = 'all 0.3s ease';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 255, 234, 0.3)';
+                    
+                    // Эффект волны при наведении
+                    createWaterRipple(
+                        this.getBoundingClientRect().left + this.offsetWidth/2,
+                        this.getBoundingClientRect().top + this.offsetHeight/2
+                    );
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Обработчики для кнопок GitHub
+            document.querySelectorAll('a[href*="github.com"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Клик по GitHub ссылке');
+                    
+                    // Уведомление
+                    if (window.OceanNotifications) {
+                        window.OceanNotifications.info('Переход на GitHub...', 'info', 2000);
+                    }
+                    
+                    // Водный эффект
+                    const rect = this.getBoundingClientRect();
+                    createSplashEffect(rect.left + rect.width/2, rect.top + rect.height/2);
+                    
+                    setTimeout(() => {
+                        window.open(this.href, '_blank');
+                    }, 1000);
+                });
+            });
+
+            // Обработчики для тестовых ссылок
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Клик по тестовой ссылке');
+                    
+                    // Уведомление
+                    if (window.OceanNotifications) {
+                        window.OceanNotifications.warning('Эта функция находится в разработке', 'warning', 3000);
+                    }
+                    
+                    // Водный эффект
+                    const rect = this.getBoundingClientRect();
+                    createSplashEffect(rect.left + rect.width/2, rect.top + rect.height/2);
+                });
+            });
+
+            // Эффекты для модальных окон
+            document.querySelectorAll('.project-detail-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const rect = this.getBoundingClientRect();
+                    createSplashEffect(rect.left + rect.width/2, rect.top + rect.height/2);
+                });
+            });
+        }
+
+        // Добавляем дополнительные CSS анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bubbleFloat {
+                0% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100px) translateX(${Math.random() * 40 - 20}px);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes splashEffect {
+                0% {
+                    transform: scale(0.8);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1.5);
+                    opacity: 0;
+                }
+            }
+            
+            .project-item {
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            
+            .filter-btn {
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .filter-btn::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.3s, height 0.3s;
+            }
+            
+            .filter-btn:hover::before {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .filter-btn.active {
+                animation: waterRippleEffect 0.6s ease;
+                background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
+                border-color: #00b4d8 !important;
+                box-shadow: 0 0 20px rgba(0, 255, 234, 0.4) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

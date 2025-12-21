@@ -1,0 +1,1224 @@
+/* ============================================
+   ОСНОВНЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ
+   ============================================ */
+
+:root {
+    color-scheme: dark;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+}
+
+/* ============================================
+   ОСНОВНЫЕ СТИЛИ
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: #0a0614;
+    color: #e8d5ff;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+#plasmaCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#cursorGlow {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 140px;
+    margin-left: -70px;
+    margin-top: -70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 132, 252, 0.4) 0%, rgba(168, 85, 247, 0.2) 40%, transparent 70%);
+    box-shadow: 0 0 60px 30px rgba(192, 132, 252, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+    mix-blend-mode: screen;
+}
+
+header, nav, main, footer {
+    position: relative;
+    z-index: 10;
+}
+
+/* ============================================
+   ДОСТУПНОСТЬ (Задание 15)
+   ============================================ */
+
+.skip-link {
+    position: absolute;
+    inset-inline-start: 1rem;
+    inset-block-start: -100%;
+    z-index: 10000;
+    padding: 0.5rem 0.75rem;
+    background: #111;
+    color: #fff;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: inset-block-start 0.3s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    inset-block-start: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid #ffc107 !important;
+    outline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline-offset: 2px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+
+.glass-effect {
+    background: rgba(30, 20, 50, 0.6) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    box-shadow: 0 12px 40px rgba(168, 85, 247, 0.3), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-radius: 24px !important;
+    transition: all 0.4s ease;
+}
+
+/* ============================================
+   ШАПКА И НАВИГАЦИЯ
+   ============================================ */
+
+header {
+    background: rgba(25, 15, 45, 0.7) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    color: #f5e6ff;
+    padding: 1.6rem 1rem;
+    text-align: center;
+    font-size: clamp(1.4rem, 5vw, 2.1rem);
+    font-weight: 700;
+    text-shadow: 0 0 25px rgba(192, 132, 252, 0.6), 2px 2px 12px rgba(0, 0, 0, 0.9);
+    letter-spacing: 1.2px;
+    border-bottom: 2px solid rgba(192, 132, 252, 0.5);
+    animation: headerSlideDown 0.8s ease;
+    border-radius: 0 0 24px 24px;
+    padding-inline: calc(1rem + env(safe-area-inset-left)) calc(1rem + env(safe-area-inset-right));
+}
+
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header img {
+    animation: logoPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(192, 132, 252, 0.7));
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.navbar {
+    position: sticky !important;
+    top: 0;
+    z-index: 1000 !important;
+    background: rgba(30, 20, 55, 0.7) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    border-bottom: 1px solid rgba(192, 132, 252, 0.3);
+    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.25);
+    animation: navSlideIn 1s ease;
+    padding-block-start: calc(0.5rem + env(safe-area-inset-top)) !important;
+    padding-block-end: 0.5rem !important;
+    padding-inline-start: calc(1rem + env(safe-area-inset-left)) !important;
+    padding-inline-end: calc(1rem + env(safe-area-inset-right)) !important;
+    isolation: isolate;
+}
+
+@keyframes navSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nav-link {
+    color: #e8d5ff !important;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 14px;
+    font-weight: 500;
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
+    min-height: 44px;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #c084fc, #a855f7);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px #c084fc;
+    border-radius: 2px;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    width: 80%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(192, 132, 252, 0.25);
+    color: #f5e6ff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(192, 132, 252, 0.5);
+    text-shadow: 0 0 18px rgba(192, 132, 252, 0.9);
+}
+
+/* ============================================
+   АНИМАЦИИ - ОПТИМИЗИРОВАННЫЕ
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h1 {
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+    text-shadow: 0 0 25px rgba(192, 132, 252, 0.6);
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.5rem) !important;
+}
+
+h2 {
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.15s;
+    opacity: 0;
+    text-shadow: 0 0 18px rgba(192, 132, 252, 0.4);
+    font-size: clamp(1.3rem, 1rem + 1.5vw, 2rem) !important;
+}
+
+h3 {
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: 0.15s;
+    opacity: 0;
+    text-shadow: 0 0 18px rgba(192, 132, 252, 0.4);
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.5rem) !important;
+}
+
+/* Упрощенные анимации для карточек */
+.card {
+    animation: scaleIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.15s; }
+.card:nth-child(3) { animation-delay: 0.2s; }
+.card:nth-child(4) { animation-delay: 0.25s; }
+.card:nth-child(5) { animation-delay: 0.3s; }
+.card:nth-child(6) { animation-delay: 0.35s; }
+
+/* ============================================
+   АДАПТИВНЫЕ ИЗОБРАЖЕНИЯ (Задание 16)
+   ============================================ */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.profile-photo {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    box-shadow: 0 0 45px rgba(192, 132, 252, 0.7), 
+                0 0 90px rgba(168, 85, 247, 0.5);
+    border: 4px solid rgba(192, 132, 252, 0.7) !important;
+    transition: all 0.4s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 60px rgba(192, 132, 252, 0.9), 
+                0 0 120px rgba(168, 85, 247, 0.7);
+    border-color: rgba(216, 180, 254, 0.9) !important;
+}
+
+picture {
+    display: block;
+    width: 100%;
+}
+
+picture img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* ============================================
+   КАРТОЧКИ - ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ
+   ============================================ */
+
+.card {
+    background: rgba(30, 20, 55, 0.55) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    border-radius: 24px !important;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(192, 132, 252, 0.35) !important;
+    box-shadow: 0 10px 35px rgba(168, 85, 247, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    
+    /* Flexbox для контроля содержимого */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(192, 132, 252, 0.6), 
+                0 0 70px rgba(168, 85, 247, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    border-color: rgba(216, 180, 254, 0.7) !important;
+}
+
+.card-img-top {
+    transition: transform 0.4s ease;
+    border-radius: 24px 24px 0 0;
+    object-fit: cover;
+    width: 100%;
+    height: 220px;
+    flex-shrink: 0;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.project-card {
+    cursor: pointer;
+    min-width: 0;
+}
+
+.project-card h3,
+.project-card .h5,
+.project-card p {
+    overflow-wrap: anywhere;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+}
+
+.project-card .card-body p.small {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 1rem;
+    flex: 0 1 auto;
+}
+
+.card-body .text-center:last-child {
+    margin-top: auto;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   ПРОЕКТЫ - ЧИСТЫЙ BOOTSTRAP (БЕЗ GRID!)
+   ============================================ */
+
+/* Отключаем все Grid стили */
+.projects-area .row.g-4 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 1.5rem !important;
+    align-items: stretch !important;
+}
+
+/* Убираем стандартные отступы Bootstrap */
+.projects-area .row.g-4 > * {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Мобильные - 1 колонка */
+@media (max-width: 767px) {
+    .projects-area .col-lg-4,
+    .projects-area .col-md-6 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Планшеты - 2 колонки */
+@media (min-width: 768px) and (max-width: 991px) {
+    .projects-area .col-md-6 {
+        flex: 0 0 calc(50% - 0.75rem) !important;
+        max-width: calc(50% - 0.75rem) !important;
+    }
+}
+
+/* Десктоп - 3 колонки */
+@media (min-width: 992px) {
+    .projects-area .col-lg-4 {
+        flex: 0 0 calc(33.333% - 1rem) !important;
+        max-width: calc(33.333% - 1rem) !important;
+    }
+}
+
+/* Фиксированная высота изображений */
+.projects-area .card-img-top {
+    height: 220px !important;
+    min-height: 220px !important;
+    max-height: 220px !important;
+}
+
+@media (max-width: 767px) {
+    .projects-area .card-img-top {
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .projects-area .card-img-top {
+        height: 240px !important;
+        min-height: 240px !important;
+        max-height: 240px !important;
+    }
+}
+
+/* ============================================
+   КНОПКИ
+   ============================================ */
+
+.btn-warning {
+    background: linear-gradient(135deg, #a855f7, #9333ea, #7e22ce);
+    border: none;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    font-weight: 700;
+    padding: 0.7rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    min-height: 44px;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #d8b4fe, #c084fc, #a855f7);
+    color: #1a0a2e;
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(216, 180, 254, 0.9), 
+                0 10px 30px rgba(192, 132, 252, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-outline-warning {
+    border: 2px solid rgba(192, 132, 252, 0.7);
+    color: #e8d5ff;
+    background: rgba(30, 20, 55, 0.4);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 14px;
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.6);
+    min-height: 44px;
+}
+
+.btn-outline-warning:hover {
+    background: rgba(192, 132, 252, 0.35);
+    color: #ffffff;
+    border-color: #d8b4fe;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(192, 132, 252, 0.7);
+}
+
+.btn-outline-warning.active {
+    background: rgba(192, 132, 252, 0.45);
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(192, 132, 252, 0.7);
+}
+
+/* ============================================
+   ФОРМЫ
+   ============================================ */
+
+.form-control, .form-select {
+    background: rgba(35, 25, 65, 0.6) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(192, 132, 252, 0.35) !important;
+    color: #e8d5ff !important;
+    transition: all 0.3s ease;
+    border-radius: 14px;
+    min-height: 44px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #c084fc !important;
+    box-shadow: 0 0 0 0.25rem rgba(192, 132, 252, 0.3), 
+                inset 0 0 25px rgba(192, 132, 252, 0.15) !important;
+    background: rgba(45, 30, 75, 0.7) !important;
+}
+
+.form-label {
+    color: #e8d5ff;
+    font-weight: 500;
+}
+
+/* ============================================
+   ПРОГРЕСС-БАРЫ
+   ============================================ */
+
+.progress {
+    background: rgba(35, 25, 65, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
+    height: 28px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(192, 132, 252, 0.25);
+}
+
+.progress-bar {
+    transition: width 1.5s ease;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.progress-bar.bg-success {
+    background: linear-gradient(90deg, #10b981, #34d399);
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.7);
+}
+
+.progress-bar.bg-warning {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.7);
+}
+
+.progress-bar.bg-info {
+    background: linear-gradient(90deg, #06b6d4, #22d3ee);
+    box-shadow: 0 0 18px rgba(6, 182, 212, 0.7);
+}
+
+.progress-bar.bg-primary {
+    background: linear-gradient(90deg, #8b5cf6, #a78bfa);
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.7);
+}
+
+.progress-bar.bg-danger {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.7);
+}
+
+/* ============================================
+   ИКОНКИ ПРОЕКТОВ
+   ============================================ */
+
+.project-icon-card {
+    min-height: 200px;
+    transition: all 0.4s ease;
+    background: rgba(30, 20, 55, 0.55) !important;
+    backdrop-filter: blur(25px);
+}
+
+.project-icon-card .project-icon {
+    color: #c084fc;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 18px rgba(192, 132, 252, 0.7));
+}
+
+.project-icon-card:hover {
+    transform: translateY(-12px) scale(1.08);
+    box-shadow: 0 25px 60px rgba(192, 132, 252, 0.6);
+    background: rgba(35, 25, 70, 0.7) !important;
+}
+
+.project-icon-card:hover .project-icon {
+    transform: scale(1.4) rotate(15deg);
+    filter: drop-shadow(0 0 30px rgba(192, 132, 252, 1));
+}
+
+/* ============================================
+   TIMELINE
+   ============================================ */
+
+.timeline-badge.completed {
+    color: #10b981 !important;
+    filter: drop-shadow(0 0 12px #10b981);
+}
+
+.timeline-badge.in-progress {
+    color: #c084fc !important;
+    filter: drop-shadow(0 0 12px #c084fc);
+}
+
+.timeline-item {
+    animation: fadeInLeft 0.6s ease forwards;
+    opacity: 0;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.3s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.5s; }
+.timeline-item:nth-child(4) { animation-delay: 0.6s; }
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   ДОСТИЖЕНИЯ
+   ============================================ */
+
+.achievement-item {
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.achievement-item:hover {
+    background: rgba(192, 132, 252, 0.25);
+    transform: scale(1.08);
+}
+
+/* ============================================
+   МОДАЛЬНЫЕ ОКНА
+   ============================================ */
+
+.modal-content {
+    background: rgba(30, 20, 55, 0.95) !important;
+    backdrop-filter: blur(35px) saturate(180%);
+    border: 2px solid rgba(192, 132, 252, 0.5) !important;
+    box-shadow: 0 0 70px rgba(192, 132, 252, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(192, 132, 252, 0.4) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(192, 132, 252, 0.4) !important;
+}
+
+/* ============================================
+   BADGE
+   ============================================ */
+
+.badge {
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+}
+
+.badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   ФУТЕР
+   ============================================ */
+
+footer {
+    background: rgba(25, 15, 45, 0.7) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    border-top: 2px solid rgba(192, 132, 252, 0.5);
+    border-radius: 24px 24px 0 0;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+}
+
+/* ============================================
+   СКРОЛЛБАР
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 10, 30, 0.95);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #a855f7, #c084fc);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #c084fc, #e9d5ff);
+}
+
+/* ============================================
+   ДОПОЛНИТЕЛЬНЫЕ СТИЛИ
+   ============================================ */
+
+.text-warning {
+    color: #d8b4fe !important;
+    text-shadow: 0 0 18px rgba(216, 180, 254, 0.6);
+}
+
+.text-white {
+    color: #f5e6ff !important;
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+}
+
+.text-light {
+    color: #e8d5ff !important;
+}
+
+.border-warning {
+    border-color: rgba(192, 132, 252, 0.5) !important;
+}
+
+.border-info {
+    border-color: rgba(139, 92, 246, 0.5) !important;
+}
+
+.border-success {
+    border-color: rgba(16, 185, 129, 0.5) !important;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(192, 132, 252, 0.025) 2px,
+        rgba(192, 132, 252, 0.025) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.skill-item {
+    transition: all 0.3s ease;
+    padding: 0.6rem;
+    border-radius: 14px;
+}
+
+.skill-item:hover {
+    background: rgba(192, 132, 252, 0.2);
+    transform: translateX(6px);
+    cursor: pointer;
+}
+
+.contact-item {
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(192, 132, 252, 0.25) !important;
+    transform: translateX(6px);
+}
+
+.container {
+    padding-inline: clamp(1rem, calc(0.5rem + 1vw), 2rem);
+}
+
+main {
+    padding-inline: clamp(0.75rem, 0.5rem + 1vw, 2rem);
+}
+
+body {
+    font-size: clamp(0.875rem, 0.8rem + 0.5vw, 1rem);
+}
+
+.card-body p,
+.text-light {
+    font-size: clamp(0.875rem, 0.85rem + 0.3vw, 1rem);
+}
+
+.lead {
+    max-width: 65ch;
+}
+
+/* ============================================
+   ПРЕДПОЧТЕНИЯ ПОЛЬЗОВАТЕЛЯ (Задание 15)
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    #cursorGlow {
+        display: none !important;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .btn,
+    .card,
+    .glass-effect {
+        border: 2px solid #fff !important;
+        box-shadow: inset 0 0 0 2px #fff;
+    }
+    
+    .text-white,
+    .text-warning {
+        text-shadow: 2px 2px 4px #000;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color-scheme: light;
+    }
+}
+
+/* ============================================
+   ПЕЧАТЬ (Задание 16)
+   ============================================ */
+
+@media print {
+    #plasmaCanvas,
+    #cursorGlow,
+    body::after {
+        display: none !important;
+    }
+    
+    .glass-effect,
+    .card {
+        background: #fff !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    }
+    
+    *,
+    *::before,
+    *::after {
+        text-shadow: none !important;
+        box-shadow: none !important;
+    }
+    
+    .card,
+    .project-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ
+   ============================================ */
+
+@media (pointer: coarse) {
+    a, button, .nav-link, .btn {
+        min-height: 44px;
+        padding-block: max(0.5rem, calc((44px - 1em) / 2));
+        padding-inline: max(0.75rem, calc((44px - 1em) / 2));
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .card:hover {
+        transform: none;
+        box-shadow: 0 10px 35px rgba(168, 85, 247, 0.25);
+    }
+    
+    .btn-warning:hover {
+        transform: none;
+    }
+    
+    .nav-link:hover {
+        transform: none;
+    }
+    
+    .btn {
+        padding: 1rem 1.5rem !important;
+    }
+}
+
+@media (max-width: 374px) {
+    .profile-photo {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    
+    .btn-lg {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .card-body {
+        padding: 0.75rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .display-4, .display-5 {
+        font-size: clamp(1.5rem, 1.2rem + 1.5vw, 1.8rem);
+    }
+
+    .btn-lg {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.95rem;
+        min-height: 44px;
+    }
+    
+    .profile-photo {
+        width: 150px !important;
+        height: 150px !important;
+    }
+    
+    #cursorGlow {
+        display: none !important;
+    }
+    
+    .nav-link {
+        padding: 1rem !important;
+    }
+    
+    .navbar-nav {
+        gap: var(--space-md, 1rem);
+    }
+    
+    .card {
+        margin-inline: 0;
+    }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+    .profile-photo {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    
+    header {
+        padding: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .profile-photo {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+@supports (-webkit-appearance: none) {
+    .profile-photo {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+@-moz-document url-prefix() {
+    .glass-effect {
+        background: rgba(30, 20, 50, 0.8) !important;
+    }
+}
+/* ============================================
+   ПРАКТИКИ 17 + 18: ДОСТУПНОСТЬ ФОРМ
+   ============================================ */
+
+/* Модальное окно успеха */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 20, 55, 0.95);
+    backdrop-filter: blur(35px);
+    padding: 2rem;
+    border-radius: 24px;
+    border: 2px solid rgba(192, 132, 252, 0.5);
+    box-shadow: 0 0 70px rgba(192, 132, 252, 0.5);
+    z-index: 1001;
+    max-width: 500px;
+    width: 90%;
+}
+
+.modal:focus {
+    outline: 3px solid #ffc107;
+    outline-offset: 2px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+/* Валидация форм - визуальные индикаторы */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #198754 !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+/* Сообщения об ошибках */
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.form-control.is-invalid ~ .invalid-feedback,
+.form-select.is-invalid ~ .invalid-feedback {
+    display: block;
+}
+
+/* Улучшенный фокус на полях формы */
+.form-control:focus,
+.form-select:focus {
+    border-color: #c084fc !important;
+    box-shadow: 0 0 0 0.25rem rgba(192, 132, 252, 0.25) !important;
+}
+
+/* ARIA live regions */
+[role="status"],
+[role="alert"] {
+    position: relative;
+}
+
+/* Fieldset стили */
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e8d5ff;
+    margin-bottom: 0.5rem;
+}
+/* ============================================
+   КРИТИЧЕСКИЙ ФИКС ДЛЯ DIARY - ДОБАВЬ В КОНЕЦ
+   ============================================ */
+
+/* Отключаем ВСЕ grid-стили для ВСЕХ .row (включая diary) */
+.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    grid-template-columns: none !important;
+}
+
+/* Убираем кастомный gap из grid - только Bootstrap margins */
+.row.g-4 {
+    margin-right: -0.75rem !important;
+    margin-left: -0.75rem !important;
+}
+
+.row.g-4 > * {
+    padding-right: 0.75rem !important;
+    padding-left: 0.75rem !important;
+}
+
+/* Все карточки внутри .col-* должны тянуться */
+.row [class*="col-"] {
+    display: flex !important;
+}
+
+.row .card {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Исправление timeline-items */
+.timeline-item {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Исправление stat-items */
+.stat-item {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Убираем конфликты с projects-area */
+.projects-area .row.g-4 {
+    /* Только для проектов оставляем gap */
+    gap: 1.5rem !important;
+    margin: 0 !important;
+}
+
+.projects-area .row.g-4 > * {
+    padding: 0 !important;
+}

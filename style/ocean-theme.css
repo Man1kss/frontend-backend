@@ -1,0 +1,1034 @@
+/* ============================================
+   МОРСКАЯ ТЕМА - ОСНОВНЫЕ ПЕРЕМЕННЫЕ
+   ============================================ */
+
+:root {
+    color-scheme: dark;
+    
+    /* Океанская цветовая палитра */
+    --ocean-deep: #03045e;
+    --ocean-dark: #0077b6;
+    --ocean-medium: #00b4d8;
+    --ocean-light: #90e0ef;
+    --ocean-glow: #caf0f8;
+    --aqua-accent: #00ffea;
+    --sea-foam: #a8e6cf;
+    --coral: #ff6b6b;
+    
+    /* Градиенты */
+    --gradient-deep-ocean: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean-dark) 50%, var(--ocean-medium) 100%);
+    --gradient-surface: linear-gradient(180deg, var(--ocean-light) 0%, var(--ocean-medium) 100%);
+    --gradient-aqua: linear-gradient(135deg, var(--aqua-accent) 0%, var(--ocean-light) 100%);
+    
+    /* Размеры */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    
+    /* Эффекты стекла */
+    --glass-bg: rgba(3, 4, 94, 0.15);
+    --glass-border: rgba(202, 240, 248, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 183, 255, 0.1);
+}
+
+/* ============================================
+   ОСНОВНЫЕ СТИЛИ МОРСКОЙ ТЕМЫ
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+html, body {
+    height: 100%;
+}
+
+.ocean-theme {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    background: var(--gradient-deep-ocean);
+    color: var(--ocean-glow);
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-inline: env(safe-area-inset-left) env(safe-area-inset-right);
+}
+
+/* ============================================
+   АНИМИРОВАННЫЙ ОКЕАНСКИЙ ФОН
+   ============================================ */
+
+.ocean-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.waves-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 180, 216, 0.3) 50%, 
+        transparent 100%);
+    animation: waveMove 15s linear infinite;
+    transform-origin: center bottom;
+}
+
+.wave-1 {
+    height: 60%;
+    opacity: 0.6;
+    animation-duration: 20s;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(144, 224, 239, 0.4) 50%, 
+        transparent 100%);
+}
+
+.wave-2 {
+    height: 45%;
+    opacity: 0.4;
+    animation-duration: 15s;
+    animation-delay: -5s;
+}
+
+.wave-3 {
+    height: 30%;
+    opacity: 0.2;
+    animation-duration: 10s;
+    animation-delay: -2s;
+}
+
+@keyframes waveMove {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1);
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.8);
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1);
+    }
+}
+
+.bubbles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.liquid-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   ПЛАВАЮЩИЕ ЧАСТИЦЫ И ПУЗЫРЬКИ
+   ============================================ */
+
+.floating-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--ocean-light) 0%, transparent 70%);
+    animation: float 20s infinite linear;
+}
+
+.bubble-1 {
+    width: 8px;
+    height: 8px;
+    left: 10%;
+    animation-duration: 25s;
+    animation-delay: 0s;
+}
+
+.bubble-2 {
+    width: 12px;
+    height: 12px;
+    left: 30%;
+    animation-duration: 20s;
+    animation-delay: 5s;
+}
+
+.bubble-3 {
+    width: 6px;
+    height: 6px;
+    left: 70%;
+    animation-duration: 30s;
+    animation-delay: 10s;
+}
+
+.seaweed-1,
+.seaweed-2 {
+    width: 4px;
+    height: 40px;
+    border-radius: 2px;
+    background: linear-gradient(to top, var(--sea-foam) 0%, transparent 100%);
+    animation: seaweedSway 8s ease-in-out infinite;
+}
+
+.seaweed-1 {
+    bottom: 0;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.seaweed-2 {
+    bottom: 0;
+    left: 80%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes seaweedSway {
+    0%, 100% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+/* ============================================
+   СТЕКЛЯННЫЙ МОРФИЗМ - ОКЕАНСКИЙ СТИЛЬ
+   ============================================ */
+
+.ocean-glass {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 20px !important;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ocean-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(202, 240, 248, 0.1), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.ocean-glass:hover::before {
+    left: 100%;
+}
+
+.aqua-card {
+    border: 1px solid rgba(0, 255, 234, 0.3) !important;
+    box-shadow: 0 8px 32px rgba(0, 255, 234, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.aqua-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 255, 234, 0.3),
+                0 0 60px rgba(0, 255, 234, 0.1);
+    border-color: rgba(0, 255, 234, 0.6) !important;
+}
+
+/* ============================================
+   ТИПОГРАФИЯ И ЦВЕТА
+   ============================================ */
+
+.text-glow {
+    color: var(--ocean-glow) !important;
+    text-shadow: 0 0 20px rgba(202, 240, 248, 0.5),
+                 0 0 40px rgba(0, 180, 216, 0.3);
+}
+
+.aqua-gradient {
+    background: linear-gradient(135deg, var(--aqua-accent), var(--ocean-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 255, 234, 0.5);
+}
+
+.ocean-text {
+    color: var(--ocean-glow) !important;
+}
+
+.water-text {
+    background: linear-gradient(135deg, var(--ocean-light), var(--aqua-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   ИКОНКИ С ВОДНЫМИ ЭФФЕКТАМИ
+   ============================================ */
+
+.water-icon {
+    color: var(--aqua-accent);
+    text-shadow: 0 0 15px rgba(0, 255, 234, 0.7);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.water-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(0, 255, 234, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.water-icon:hover::after {
+    width: 40px;
+    height: 40px;
+}
+
+.water-icon:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 25px rgba(0, 255, 234, 1);
+}
+
+.project-icon {
+    font-size: 2.5rem !important;
+    animation: waterRipple 3s ease-in-out infinite;
+}
+
+@keyframes waterRipple {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 15px rgba(0, 255, 234, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 25px rgba(0, 255, 234, 1),
+                     0 0 40px rgba(0, 180, 216, 0.5);
+    }
+}
+
+.stats-icon {
+    font-size: 3rem !important;
+    animation: floatIcon 6s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+    66% {
+        transform: translateY(-5px) rotate(-5deg);
+    }
+}
+
+/* ============================================
+   ШАПКА И НАВИГАЦИЯ
+   ============================================ */
+
+.ocean-header {
+    background: rgba(3, 4, 94, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    color: var(--ocean-glow);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    font-size: clamp(1.4rem, 5vw, 2.1rem);
+    font-weight: 700;
+    text-shadow: 0 0 30px rgba(0, 255, 234, 0.6);
+    letter-spacing: 1.2px;
+    border-bottom: 2px solid rgba(0, 255, 234, 0.5);
+    animation: headerSlideDown 0.8s ease;
+    border-radius: 0 0 24px 24px;
+    position: relative;
+    z-index: 100;
+}
+
+@keyframes headerSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-container {
+    position: relative;
+}
+
+.water-logo {
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+.logo-wave {
+    filter: drop-shadow(0 0 10px rgba(0, 255, 234, 0.7));
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+.ocean-navbar {
+    position: sticky !important;
+    top: 0;
+    z-index: 1000 !important;
+    background: rgba(3, 4, 94, 0.8) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 255, 234, 0.3);
+    box-shadow: 0 8px 30px rgba(0, 183, 255, 0.2);
+    animation: navSlideIn 1s ease;
+    padding-block: 0.5rem !important;
+}
+
+@keyframes navSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.water-link {
+    color: var(--ocean-glow) !important;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 14px;
+    font-weight: 500;
+    text-shadow: 0 0 12px rgba(0, 255, 234, 0.4);
+    min-height: 44px;
+    overflow: hidden;
+}
+
+.water-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--aqua-accent), var(--ocean-light));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    box-shadow: 0 0 15px var(--aqua-accent);
+    border-radius: 2px;
+}
+
+.water-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 234, 0.1), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.water-link:hover::before,
+.water-link.active::before {
+    width: 80%;
+}
+
+.water-link:hover::after,
+.water-link.active::after {
+    left: 100%;
+}
+
+.water-link:hover,
+.water-link.active {
+    background: rgba(0, 255, 234, 0.15);
+    color: var(--ocean-glow) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 234, 0.3);
+}
+
+.ocean-toggler {
+    border: 1px solid rgba(0, 255, 234, 0.3) !important;
+    background: rgba(3, 4, 94, 0.5) !important;
+}
+
+.ocean-toggler:hover {
+    background: rgba(0, 255, 234, 0.1) !important;
+    box-shadow: 0 0 15px rgba(0, 255, 234, 0.3);
+}
+
+/* ============================================
+   КНОПКИ В МОРСКОМ СТИЛЕ
+   ============================================ */
+
+.aqua-btn {
+    background: linear-gradient(135deg, var(--aqua-accent), var(--ocean-light));
+    border: none;
+    transition: all 0.3s ease;
+    color: var(--ocean-deep) !important;
+    font-weight: 700;
+    padding: 0.7rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 255, 234, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-height: 44px;
+    position: relative;
+    overflow: hidden;
+}
+
+.aqua-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.aqua-btn:hover::before {
+    left: 100%;
+}
+
+.aqua-btn:hover {
+    background: linear-gradient(135deg, var(--ocean-light), var(--aqua-accent));
+    color: var(--ocean-deep) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 255, 234, 0.6),
+                0 0 40px rgba(0, 255, 234, 0.3);
+}
+
+.ocean-outline-btn {
+    border: 2px solid rgba(0, 255, 234, 0.6);
+    color: var(--ocean-glow);
+    background: rgba(3, 4, 94, 0.3);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    border-radius: 14px;
+    text-shadow: 0 0 12px rgba(0, 255, 234, 0.6);
+    min-height: 44px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ocean-outline-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(0, 255, 234, 0.1), 
+        transparent);
+    transition: left 0.5s ease;
+}
+
+.ocean-outline-btn:hover::before {
+    left: 100%;
+}
+
+.ocean-outline-btn:hover {
+    background: rgba(0, 255, 234, 0.2);
+    color: var(--ocean-glow);
+    border-color: var(--aqua-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 255, 234, 0.5);
+}
+
+/* ============================================
+   ПРОФИЛЬ И ИЗОБРАЖЕНИЯ
+   ============================================ */
+
+.profile-aqua-container {
+    position: relative;
+    display: inline-block;
+}
+
+.water-frame {
+    position: relative;
+    border-radius: 50%;
+    padding: 8px;
+    background: linear-gradient(135deg, var(--aqua-accent), var(--ocean-light));
+    animation: frameGlow 3s ease-in-out infinite;
+}
+
+@keyframes frameGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 255, 234, 0.5),
+                    0 0 40px rgba(0, 180, 216, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 255, 234, 0.8),
+                    0 0 60px rgba(0, 180, 216, 0.5);
+    }
+}
+
+.aqua-photo {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 280px;
+    height: 280px;
+    border: 4px solid var(--ocean-deep) !important;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.aqua-photo:hover {
+    transform: scale(1.05);
+    border-color: var(--aqua-accent) !important;
+}
+
+.water-reflection {
+    position: absolute;
+    bottom: -10px;
+    left: 10%;
+    width: 80%;
+    height: 20px;
+    background: linear-gradient(transparent, rgba(0, 255, 234, 0.3));
+    border-radius: 50%;
+    filter: blur(5px);
+    animation: reflectionShift 4s ease-in-out infinite;
+}
+
+@keyframes reflectionShift {
+    0%, 100% {
+        transform: translateX(0) scaleX(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateX(10px) scaleX(0.9);
+        opacity: 0.5;
+    }
+}
+
+/* ============================================
+   ВОДНЫЕ ПРОГРЕСС-БАРЫ
+   ============================================ */
+
+.water-progress {
+    background: rgba(3, 4, 94, 0.4);
+    backdrop-filter: blur(12px);
+    border-radius: 14px;
+    height: 28px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 234, 0.2);
+    position: relative;
+}
+
+.water-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--aqua-accent), var(--ocean-light));
+    border-radius: 14px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.water-progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+    animation: waterShimmer 2s infinite;
+}
+
+@keyframes waterShimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* ============================================
+   КАРТОЧКИ ПРОЕКТОВ
+   ============================================ */
+
+.project-card {
+    cursor: pointer;
+    min-width: 0;
+    transition: all 0.4s ease;
+}
+
+.project-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
+.project-image {
+    transition: transform 0.4s ease;
+    height: 220px;
+    object-fit: cover;
+}
+
+.water-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 255, 234, 0.1) 0%, 
+        transparent 50%, 
+        rgba(0, 180, 216, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .water-overlay {
+    opacity: 1;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   БЕЙДЖИ
+   ============================================ */
+
+.aqua-badge {
+    background: linear-gradient(135deg, var(--aqua-accent), var(--ocean-light));
+    color: var(--ocean-deep) !important;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ocean-badge {
+    background: linear-gradient(135deg, var(--ocean-medium), var(--ocean-dark));
+    color: var(--ocean-glow) !important;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 255, 234, 0.3);
+}
+
+.aqua-badge:hover,
+.ocean-badge:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 18px rgba(0, 255, 234, 0.3);
+}
+
+/* ============================================
+   СПИСКИ И ДОСТИЖЕНИЯ
+   ============================================ */
+
+.ocean-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ocean-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 255, 234, 0.1);
+    transition: all 0.3s ease;
+}
+
+.ocean-list li:hover {
+    background: rgba(0, 255, 234, 0.1);
+    transform: translateX(5px);
+    border-radius: 8px;
+    padding-left: 0.5rem;
+}
+
+.aqua-achievements {
+    position: relative;
+}
+
+.achievement-item {
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 16px;
+    background: rgba(0, 255, 234, 0.05);
+    border: 1px solid rgba(0, 255, 234, 0.1);
+    margin-bottom: 1rem;
+}
+
+.achievement-item:hover {
+    background: rgba(0, 255, 234, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 255, 234, 0.2);
+}
+
+/* ============================================
+   КУРСОР И УВЕДОМЛЕНИЯ
+   ============================================ */
+
+.aqua-cursor {
+    position: fixed;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 140px;
+    height: 140px;
+    margin-left: -70px;
+    margin-top: -70px;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(0, 255, 234, 0.4) 0%, 
+        rgba(0, 180, 216, 0.2) 40%, 
+        transparent 70%);
+    box-shadow: 0 0 60px 30px rgba(0, 255, 234, 0.3);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    z-index: 9998;
+    mix-blend-mode: screen;
+}
+
+.ocean-notifications {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+/* ============================================
+   ФУТЕР
+   ============================================ */
+
+.ocean-footer {
+    background: rgba(3, 4, 94, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    border-top: 2px solid rgba(0, 255, 234, 0.5);
+    border-radius: 24px 24px 0 0;
+    position: relative;
+    z-index: 100;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+}
+
+/* ============================================
+   ДОСТУПНОСТЬ
+   ============================================ */
+
+.ocean-skip {
+    position: absolute;
+    inset-inline-start: 1rem;
+    inset-block-start: -100%;
+    z-index: 10000;
+    padding: 0.5rem 0.75rem;
+    background: var(--ocean-deep);
+    color: var(--ocean-glow);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: inset-block-start 0.3s ease;
+    border: 1px solid var(--aqua-accent);
+}
+
+.ocean-skip:focus,
+.ocean-skip:focus-visible {
+    inset-block-start: 1rem;
+}
+
+:focus-visible {
+    outline: 3px solid var(--aqua-accent) !important;
+    outline-offset: 3px;
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ
+   ============================================ */
+
+.glass-container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+}
+
+main {
+    padding-inline: clamp(0.75rem, 0.5rem + 1vw, 2rem);
+}
+
+.container-fluid {
+    padding-inline: clamp(1rem, calc(0.5rem + 1vw), 2rem);
+}
+
+/* Мобильные стили */
+@media (max-width: 767px) {
+    .aqua-photo {
+        width: 200px !important;
+        height: 200px !important;
+    }
+    
+    .wave {
+        animation-duration: 12s;
+    }
+    
+    .aqua-btn,
+    .ocean-outline-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .d-flex.gap-3 {
+        gap: 1rem !important;
+    }
+    
+    .aqua-cursor {
+        display: none !important;
+    }
+}
+
+/* Планшеты */
+@media (min-width: 768px) and (max-width: 991px) {
+    .aqua-photo {
+        width: 240px !important;
+        height: 240px !important;
+    }
+}
+
+/* Большие экраны */
+@media (min-width: 1200px) {
+    .container-fluid {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+}
+
+/* Уменьшение движения */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .aqua-cursor,
+    .floating-particles {
+        display: none !important;
+    }
+}
+
+/* Печать */
+@media print {
+    .ocean-background,
+    .aqua-cursor,
+    .floating-particles {
+        display: none !important;
+    }
+    
+    .ocean-glass {
+        background: #fff !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+    }
+}
+
+/* Сенсорные устройства */
+@media (hover: none) and (pointer: coarse) {
+    .project-card:hover,
+    .aqua-btn:hover,
+    .ocean-outline-btn:hover {
+        transform: none;
+    }
+    
+    .water-link:hover::before {
+        width: 0;
+    }
+}
