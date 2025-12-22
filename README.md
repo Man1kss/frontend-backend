@@ -1,1 +1,1 @@
-https://samirkhamroev.github.io/-.2/index.html
+https://Man1kss.github.io/frontend-backend/index.html

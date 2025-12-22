@@ -62,8 +62,8 @@ function setupPerformanceOptimizations() {
     
     // Предзагрузка критических ресурсов
     const criticalResources = [
-        'style/animations.css',
-        'js/water-animations.js'
+        'styles/animations.css',
+        'scripts/water-animations.js'
     ];
     
     criticalResources.forEach(resource => {
