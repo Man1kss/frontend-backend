@@ -2,233 +2,613 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио - Максим Баскаков</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Портфолио - Баскаков Максим | Морская тема</title>
+    
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preload" href="styles/ocean-theme.css" as="style">
+    <link rel="preload" href="scripts/aqua-engine.js" as="script">
+    <link rel="preload" href="fonts/techno.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Оптимизация загрузки шрифтов -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="styles/ocean-theme.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    
+    <!-- Иконка сайта -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Мета-теги для SEO и соцсетей -->
+    <meta name="description" content="Портфолио Баскакова Максима - современный веб-разработчик с морской тематикой и анимированными эффектами воды">
+    <meta name="keywords" content="веб-разработка, портфолио, JavaScript, React, морская тема">
+    <meta property="og:title" content="Портфолио - Баскаков Максим">
+    <meta property="og:description" content="Современное портфолио с морской тематикой и анимированной водой">
+    <meta property="og:type" content="website">
+    
+    <!-- Предзагрузка ключевых изображений -->
+    <!-- Removed non-critical preload for better performance -->
+    <!-- Removed non-critical preload for better performance -->
 </head>
-<body class="bg-light">
-    <div class="container-fluid p-0">
-        <!-- Header -->
-        <header class="bg-primary text-white py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 fw-bold mb-3">Баскаков Максим Станиславович</h1>
-                        <p class="lead opacity-90 mb-4">Фуллстек‑разработчик</p>
-                        <p class="fs-5 text-white-50 mb-0">
-                            Специалист по HTML, CSS, JavaScript, Bootstrap и современным веб-технологиям
-                        </p>
-                    </div>
-                    <div class="col-lg-4 text-center text-lg-end">
-                        <span class="badge bg-light text-primary fs-5 px-3 py-2 mb-3 d-inline-block">Группа ЭФБО‑06‑24</span>
-                        <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
-                            <a href="pages/contacts.html" class="btn btn-light btn-lg">
-                                <i class="bi bi-envelope me-2"></i>Связаться
-                            </a>
-                            <a href="pages/goods.html" class="btn btn-outline-light btn-lg">
-                                <i class="bi bi-cart me-2"></i>Магазин
-                            </a>
+<body class="ocean-theme">
+    <!-- Анимированный океанский фон -->
+    <div class="ocean-background">
+        <div class="waves-container">
+            <div class="wave wave-1"></div>
+            <div class="wave wave-2"></div>
+            <div class="wave wave-3"></div>
+            <div class="bubbles-container"></div>
+        </div>
+        <canvas id="liquidCanvas" class="liquid-canvas"></canvas>
+    </div>
+
+    <!-- Свечение за курсором -->
+    <div id="cursorGlow" class="aqua-cursor"></div>
+
+    <!-- Уведомления в морском стиле -->
+    <div id="notificationContainer" class="ocean-notifications"></div>
+
+    <!-- Плавающие частицы -->
+    <div class="floating-particles">
+        <div class="particle bubble-1"></div>
+        <div class="particle bubble-2"></div>
+        <div class="particle bubble-3"></div>
+        <div class="particle seaweed-1"></div>
+        <div class="particle seaweed-2"></div>
+    </div>
+
+    <!-- Skip-link для доступности -->
+    <a class="skip-link ocean-skip" href="#main">Перейти к основному содержимому</a>
+
+    <!-- Основной контейнер с стеклянным эффектом -->
+    <div class="glass-container">
+        <header class="ocean-header">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-center py-3">
+                    <!-- Анимированный логотип с водой -->
+                    <div class="logo-container me-3">
+                        <div class="water-logo">
+                            <svg width="40" height="40" viewBox="0 0 40 40" class="logo-wave">
+                                <path d="M20,5 C25,5 35,10 35,20 C35,30 25,35 20,35 C15,35 5,30 5,20 C5,10 15,5 20,5 Z" 
+                                      fill="url(#waterGradient)"/>
+                                <defs>
+                                    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00b4d8"/>
+                                        <stop offset="50%" stop-color="#0077b6"/>
+                                        <stop offset="100%" stop-color="#03045e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
                         </div>
                     </div>
+                    <h1 class="h3 mb-0 text-glow">Баскаков Максим</h1>
                 </div>
             </div>
         </header>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="top: 0; z-index: 1000;">
-            <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
+        <!-- Навигация с водным эффектом -->
+        <nav class="navbar navbar-expand-lg ocean-navbar" aria-label="Основная навигация">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold text-glow water-text" href="index.html">
+                    <i class="bi bi-droplet-half me-2"></i>Portfolio
+                </a>
+                <button class="navbar-toggler ocean-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav"
+                        aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon">
+                        <i class="bi bi-water"></i>
+                    </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html"><i class="bi bi-house me-1"></i>Главная</a>
+                            <a class="nav-link active water-link" href="index.html">
+                                <i class="bi bi-house-water me-1"></i>Главная
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/news.html"><i class="bi bi-newspaper me-1"></i>Новости</a>
+                            <a class="nav-link water-link" href="pages/projects.html">
+                                <i class="bi bi-folder-symlink me-1"></i>Проекты
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/practices.html"><i class="bi bi-code-slash me-1"></i>Практики</a>
+                            <a class="nav-link water-link" href="pages/diary.html">
+                                <i class="bi bi-journal-text me-1"></i>Дневник
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pages/goods.html"><i class="bi bi-cart me-1"></i>Товары</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="pages/contacts.html"><i class="bi bi-telephone me-1"></i>Контакты</a>
+                            <a class="nav-link water-link" href="pages/contacts.html">
+                                <i class="bi bi-telephone-outbound me-1"></i>Контакты
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <!-- Main Content -->
-        <main class="container my-5">
-            <!-- Profile Section -->
-            <section class="row g-5 mb-5">
-                <div class="col-lg-4">
-                    <div class="card shadow-sm h-100 text-center">
-                        <div class="card-body py-5">
-                            <div class="mb-4">
-                                <img src="images/avatar.png" alt="Фото" class="rounded-circle img-fluid shadow-lg" 
-                                     style="width: 180px; height: 180px; object-fit: cover;">
-                            </div>
-                            <h2 class="h4 mb-3 text-primary">Баскаков Максим Станиславович</h2>
-                            <p class="text-muted mb-4 fs-6">Группа ЭФБО‑06‑24</p>
-                            <div class="d-flex flex-column gap-2 mb-4">
-                                <span class="badge bg-primary fs-6 w-100 py-2">10+ проектов</span>
-                                <span class="badge bg-success fs-6 w-100 py-2">Адаптивная верстка</span>
-                                <span class="badge bg-info text-white fs-6 w-100 py-2">Frontend</span>
-                            </div>
-                            <a href="pages/contacts.html" class="btn btn-primary btn-lg w-100 mb-2">
-                                <i class="bi bi-chat-dots me-2"></i>Написать
-                            </a>
+        <!-- Основное содержимое -->
+        <main id="main" class="container-fluid my-5">
+            <!-- Hero Section с фото и описанием -->
+            <section class="row g-4 mb-5 align-items-center">
+                <div class="col-lg-4 text-center">
+                    <div class="profile-aqua-container">
+                        <div class="water-frame">
+                            <picture>
+                                <source type="image/webp" srcset="images/photo.webp">
+                                <img src="images/photo.jpg" 
+                                     alt="Фото студента Баскакова Максима" 
+                                     class="profile-photo aqua-photo" 
+                                     width="280" 
+                                     height="280"
+                                     fetchpriority="high"
+                                     loading="eager"
+                                     onerror="this.src='https://via.placeholder.com/280/0077b6/ffffff?text=Фото'">
+                            </picture>
+                            <div class="water-reflection"></div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-8">
-                    <!-- About -->
-                    <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-light">
-                            <h3 class="card-title h5 mb-0">
-                                <i class="bi bi-person-circle text-primary me-2"></i>О себе
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <p class="lead mb-4">
-                                Фуллстек‑разработчик и студент группы ЭФБО‑06‑24, совмещающий учебу и практические проекты.
+                    <div class="card ocean-glass aqua-card">
+                        <div class="card-body p-4">
+                            <h1 class="display-5 text-glow mb-3">
+                                <i class="bi bi-person-badge me-2 water-icon"></i>Привет! Я студент
+                            </h1>
+                            <h2 class="h4 aqua-gradient mb-3">группы ЭФБО-06-24</h2>
+                            <p class="text-light lead mb-3 ocean-text">
+                                Увлекаюсь веб-разработкой и создаю современные адаптивные веб-приложения. 
+                                Специализируюсь на HTML, CSS, JavaScript, React и других современных технологиях.
                             </p>
-                            <p>
-                            Увлекаюсь веб‑разработкой: верстаю адаптивные интерфейсы на HTML и CSS, пишу интерактив на JavaScript,
-                            работаю с базами данных и SQL. Постоянно дорабатываю личные проекты и учебные практики.
+                            <p class="text-light mb-4 ocean-text">
+                                <i class="bi bi-mortarboard-fill water-icon me-2"></i>
+                                Обучаюсь в МИРЭА - Российском технологическом университете на факультете информационных технологий. 
+                                Активно участвую в хакатонах, изучаю новые фреймворки и постоянно совершенствую свои навыки программирования.
                             </p>
-                            <p class="text-muted">
-                                Интересуюсь гейм‑дизайном и соревновательными играми, что помогает смотреть на интерфейсы
-                                и пользовательский опыт глазами реального игрока.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Skills -->
-                    <div class="card shadow-sm">
-                        <div class="card-header bg-light">
-                            <h3 class="card-title h5 mb-0">
-                                <i class="bi bi-tools text-primary me-2"></i>Навыки
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span class="fw-semibold">HTML</span>
-                                            <span class="text-primary">54%</span>
-                                        </div>
-                                        <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-primary" style="width: 54%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span class="fw-semibold">CSS</span>
-                                            <span class="text-success">46%</span>
-                                        </div>
-                                        <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-success" style="width: 46%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-4">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span class="fw-semibold">JavaScript</span>
-                                            <span class="text-info">34%</span>
-                                        </div>
-                                        <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-info" style="width: 34%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <span class="fw-semibold">SQL</span>
-                                            <span class="text-warning">68%</span>
-                                        </div>
-                                        <div class="progress" style="height: 10px;">
-                                            <div class="progress-bar bg-warning" style="width: 68%"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <a href="files/resume.txt" download class="btn aqua-btn btn-lg">
+                                    <i class="bi bi-download me-2"></i>Скачать резюме
+                                </a>
+                                <a href="pages/contacts.html" class="btn ocean-outline-btn btn-lg">
+                                    <i class="bi bi-envelope me-2"></i>Связаться
+                                </a>
+                                <a href="pages/projects.html" class="btn ocean-outline-btn btn-lg">
+                                    <i class="bi bi-folder me-2"></i>Мои работы
+                                </a>
                             </div>
-                            <div class="d-flex flex-wrap gap-2 mt-4">
-                                <span class="badge bg-primary">HTML</span>
-                                <span class="badge bg-success">CSS</span>
-                                <span class="badge bg-info text-white">JavaScript</span>
-                                <span class="badge bg-warning text-dark">SQL</span>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Quick Links -->
-            <section class="row g-4 text-center">
-                <div class="col-md-3">
-                    <a href="pages/practices.html" class="card shadow-sm h-100 text-decoration-none">
-                        <div class="card-body py-5">
-                            <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
-                            <h5 class="card-title">Практики</h5>
-                            <p class="text-muted">3 выполненных заданий</p>
+            <!-- Обо мне - дополнительная информация -->
+            <section class="mb-5">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <h3 class="text-glow mb-3">
+                                    <i class="bi bi-lightbulb me-2 water-icon"></i>Интересы и увлечения
+                                </h3>
+                                <ul class="ocean-list">
+                                    <li class="mb-2">
+                                        <i class="bi bi-code-square water-icon me-2"></i>Разработка веб-приложений с нуля
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-palette water-icon me-2"></i>UI/UX дизайн и прототипирование
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-graph-up water-icon me-2"></i>Изучение алгоритмов и структур данных
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-laptop water-icon me-2"></i>Участие в open-source проектах
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-trophy water-icon me-2"></i>Хакатоны и соревнования по программированию
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <h3 class="text-glow mb-3">
+                                    <i class="bi bi-award me-2 water-icon"></i>Достижения
+                                </h3>
+                                <div class="aqua-achievements">
+                                    <div class="achievement-item mb-3">
+                                        <h5 class="aqua-gradient mb-1">
+                                            <i class="bi bi-star-fill me-2"></i>Успешно завершил 6+ проектов
+                                        </h5>
+                                        <p class="ocean-text mb-0 small">Включая личные сайты, веб-приложения и интернет-магазины</p>
+                                    </div>
+                                    <div class="achievement-item mb-3">
+                                        <h5 class="aqua-gradient mb-1">
+                                            <i class="bi bi-people-fill me-2"></i>Работа в команде
+                                        </h5>
+                                        <p class="ocean-text mb-0 small">Опыт коллективной разработки с использованием Git и Agile методологий</p>
+                                    </div>
+                                    <div class="achievement-item">
+                                        <h5 class="aqua-gradient mb-1">
+                                            <i class="bi bi-book me-2"></i>Непрерывное обучение
+                                        </h5>
+                                        <p class="ocean-text mb-0 small">Постоянно изучаю новые технологии и фреймворки</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Мои навыки с анимированными прогресс-барами -->
+            <section class="mb-5">
+                <h2 class="text-center text-glow mb-4">
+                    <i class="bi bi-gear-fill me-2 water-icon"></i>Мои навыки и технологии
+                </h2>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <h4 class="aqua-gradient mb-4">
+                                    <i class="bi bi-laptop me-2 water-icon"></i>Frontend разработка
+                                </h4>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-filetype-html water-icon me-2"></i>HTML/CSS
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">90%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="90"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-filetype-js water-icon me-2"></i>JavaScript
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">80%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="80"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-bootstrap water-icon me-2"></i>Bootstrap
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">85%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="85"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <h4 class="aqua-gradient mb-4">
+                                    <i class="bi bi-code-slash me-2 water-icon"></i>Программирование
+                                </h4>
+                                
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-react water-icon me-2"></i>React
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">60%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="60"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item mb-4">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-git water-icon me-2"></i>Git/GitHub
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">75%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="75"></div>
+                                    </div>
+                                </div>
+
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-glow fw-bold">
+                                            <i class="bi bi-file-code water-icon me-2"></i>C++/C#
+                                        </span>
+                                        <span class="aqua-gradient fw-bold">70%</span>
+                                    </div>
+                                    <div class="water-progress">
+                                        <div class="water-progress-bar" data-width="70"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Лучшие проекты с водными эффектами -->
+            <section class="mb-5 projects-area">
+                <h2 class="text-center text-glow mb-4">
+                    <i class="bi bi-folder-fill me-2 water-icon"></i>Лучшие проекты
+                </h2>
+                <p class="text-center ocean-text mb-4">
+                    Здесь представлены мои лучшие работы в области веб-разработки с уникальными водными эффектами.
+                </p>
+                <div class="row g-4">
+                    <!-- Проект 1 -->
+                    <div class="col-lg-4 col-md-6">
+                        <a href="pages/projects.html#project1" class="text-decoration-none ocean-link">
+                            <article class="card ocean-glass project-card aqua-card h-100">
+                                <div class="project-image-container">
+                                    <picture>
+                                        <source type="image/webp" srcset="images/project1.webp">
+                                        <img src="images/project1.jpg" 
+                                             class="card-img-top project-image" 
+                                             alt="Личный сайт - адаптивное портфолио" 
+                                             width="400"
+                                             height="220"
+                                             loading="lazy"
+                                             onerror="this.src='https://via.placeholder.com/400x220/0077b6/ffffff?text=Проект+1'">
+                                    </picture>
+                                    <div class="water-overlay"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-globe2 water-icon project-icon"></i>
+                                    </div>
+                                    <h3 class="h5 text-glow text-center mb-2">Личный сайт</h3>
+                                    <p class="ocean-text small text-center mb-3">Адаптивный сайт-портфолио с современным дизайном</p>
+                                    <div class="text-center">
+                                        <span class="badge aqua-badge">HTML5</span>
+                                        <span class="badge ocean-badge">CSS3</span>
+                                        <span class="badge aqua-badge">Bootstrap</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Остальные проекты с аналогичной структурой -->
+                    <!-- Проект 2 -->
+                    <div class="col-lg-4 col-md-6">
+                        <a href="pages/projects.html#project2" class="text-decoration-none ocean-link">
+                            <article class="card ocean-glass project-card aqua-card h-100">
+                                <div class="project-image-container">
+                                    <picture>
+                                        <source type="image/webp" srcset="images/project2.webp">
+                                        <img src="images/project2.jpg" 
+                                             class="card-img-top project-image" 
+                                             alt="Todo-приложение для управления задачами" 
+                                             width="400"
+                                             height="220"
+                                             loading="lazy"
+                                             onerror="this.src='https://via.placeholder.com/400x220/00b4d8/ffffff?text=Проект+2'">
+                                    </picture>
+                                    <div class="water-overlay"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-list-check water-icon project-icon"></i>
+                                    </div>
+                                    <h3 class="h5 text-glow text-center mb-2">Todo-приложение</h3>
+                                    <p class="ocean-text small text-center mb-3">Приложение для управления задачами с Local Storage</p>
+                                    <div class="text-center">
+                                        <span class="badge ocean-badge">JavaScript</span>
+                                        <span class="badge aqua-badge">Local Storage</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+
+                    <!-- Проект 3 -->
+                    <div class="col-lg-4 col-md-6">
+                        <a href="pages/projects.html#project3" class="text-decoration-none ocean-link">
+                            <article class="card ocean-glass project-card aqua-card h-100">
+                                <div class="project-image-container">
+                                    <picture>
+                                        <source type="image/webp" srcset="images/project3.webp">
+                                        <img src="images/project3.jpg" 
+                                             class="card-img-top project-image" 
+                                             alt="Интернет-магазин на React" 
+                                             width="400"
+                                             height="220"
+                                             loading="lazy"
+                                             onerror="this.src='https://via.placeholder.com/400x220/0096c7/ffffff?text=Проект+3'">
+                                    </picture>
+                                    <div class="water-overlay"></div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="bi bi-shop water-icon project-icon"></i>
+                                    </div>
+                                    <h3 class="h5 text-glow text-center mb-2">Интернет-магазин</h3>
+                                    <p class="ocean-text small text-center mb-3">E-commerce платформа на React с корзиной</p>
+                                    <div class="text-center">
+                                        <span class="badge aqua-badge">React</span>
+                                        <span class="badge ocean-badge">API</span>
+                                    </div>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="pages/projects.html" class="btn aqua-btn btn-lg px-5">
+                        <i class="bi bi-folder2-open me-2"></i>Посмотреть все проекты
                     </a>
                 </div>
-                <div class="col-md-3">
-                    <a href="pages/news.html" class="card shadow-sm h-100 text-decoration-none">
-                        <div class="card-body py-5">
-                            <i class="bi bi-newspaper display-4 text-success mb-3"></i>
-                            <h5 class="card-title">Новости</h5>
-                            <p class="text-muted">Последние обновления</p>
+            </section>
+
+            <!-- Статистика с анимированными счетчиками -->
+            <section class="mb-5">
+                <div class="row g-4 text-center">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-code-square water-icon stats-icon"></i>
+                                <h3 class="text-glow mt-3 mb-2 counter" data-target="6">0</h3>
+                                <p class="ocean-text mb-0">Завершенных проектов</p>
+                            </div>
                         </div>
-                    </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-stack water-icon stats-icon"></i>
+                                <h3 class="text-glow mt-3 mb-2 counter" data-target="10">0</h3>
+                                <p class="ocean-text mb-0">Изученных технологий</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-github water-icon stats-icon"></i>
+                                <h3 class="text-glow mt-3 mb-2 counter" data-target="50">0</h3>
+                                <p class="ocean-text mb-0">Коммитов на GitHub</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card ocean-glass aqua-card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-cup-hot water-icon stats-icon"></i>
+                                <h3 class="text-glow mt-3 mb-2">∞</h3>
+                                <p class="ocean-text mb-0">Чашек кофе</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <a href="pages/goods.html" class="card shadow-sm h-100 text-decoration-none">
-                        <div class="card-body py-5">
-                            <i class="bi bi-cart display-4 text-info mb-3"></i>
-                            <h5 class="card-title">Магазин</h5>
-                            <p class="text-muted">Цифровые продукты</p>
+            </section>
+
+            <!-- Контактная информация -->
+            <section class="row g-4">
+                <div class="col-12">
+                    <div class="card ocean-glass aqua-card">
+                        <div class="card-body text-center py-5">
+                            <h2 class="text-glow mb-3">
+                                <i class="bi bi-envelope-heart me-2 water-icon"></i>Готов к сотрудничеству
+                            </h2>
+                            <p class="ocean-text mb-4 lead">
+                                Заинтересованы в совместной работе или хотите обсудить проект? 
+                                Свяжитесь со мной любым удобным способом!
+                            </p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+                                <a href="mailto:baskakov.m.s@edu.mirea.ru" class="btn ocean-outline-btn">
+                                    <i class="bi bi-envelope me-2"></i>Email
+                                </a>
+                                <a href="https://github.com/Man1kss" target="_blank" rel="noopener noreferrer" class="btn ocean-outline-btn">
+                                    <i class="bi bi-github me-2"></i>GitHub
+                                </a>
+                                <a href="https://t.me/Man1kss" target="_blank" rel="noopener noreferrer" class="btn ocean-outline-btn">
+                                    <i class="bi bi-telegram me-2"></i>Telegram
+                                </a>
+                            </div>
+                            <p class="ocean-text small mb-0">
+                                <i class="bi bi-clock me-2"></i>Обычно отвечаю в течение 24 часов
+                            </p>
                         </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="pages/contacts.html" class="card shadow-sm h-100 text-decoration-none">
-                        <div class="card-body py-5">
-                            <i class="bi bi-telephone display-4 text-warning mb-3"></i>
-                            <h5 class="card-title">Контакты</h5>
-                            <p class="text-muted">Написать мне</p>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-dark text-light py-3 mt-auto">
-            <div class="container d-flex flex-wrap justify-content-between align-items-center">
-                <span class="small">
-                    © 2025 Баскаков Максим Станиславович, группа ЭФБО‑06‑24
-                </span>
-                <div class="d-flex gap-3 small">
-                    <a href="contacts.html" class="link-light text-decoration-none">Контакты</a>
-                    <a href="https://github.com/" class="link-light text-decoration-none" target="_blank">GitHub</a>
-                </div>
+        <footer class="ocean-footer text-center py-4">
+            <div class="container-fluid">
+                <p class="mb-2 text-glow">© 2025 Баскаков Максим | ЭФБО-06-24</p>
+                <p class="small mb-0 ocean-text">
+                    <i class="bi bi-droplet-fill text-info me-1"></i>
+                    Сделано с любовью к океану и коду
+                </p>
             </div>
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/main.js"></script>
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/scripts/bootstrap.bundle.min.js" defer></script>
+    <script src="scripts/aqua-engine.js" defer></script>
+    <script src="scripts/liquid-canvas.js" defer></script>
+    <script src="scripts/water-animations.js" defer></script>
+    <script src="scripts/ocean-interactions.js" defer></script>
+    
+    <!-- Инициализация -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация водной анимации
+            if (typeof AquaEngine !== 'undefined') {
+                AquaEngine.init();
+            }
+            
+            // Инициализация анимированных счетчиков
+            initCounters();
+            
+            // Инициализация прогресс-баров
+            initWaterProgressBars();
+        });
+        
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.innerText = Math.ceil(current);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                // Запуск при появлении в viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+        
+        function initWaterProgressBars() {
+            const progressBars = document.querySelectorAll('.water-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = '0%';
+                
+                // Анимируем заполнение с задержкой
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 500);
+            });
+        }
+    </script>
 </body>
 </html>

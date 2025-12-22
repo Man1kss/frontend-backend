@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Дневник - Баскаков Максим | Морская тема</title>
+    
+    <!-- Предзагрузка критических ресурсов -->
+    <link rel="preload" href="../styles/ocean-theme.css" as="style">
+    <link rel="preload" href="../scripts/aqua-engine.js" as="script">
+    
+    <!-- Оптимизация загрузки -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    
+    <!-- Основные стили морской темы -->
+    <link rel="stylesheet" href="../styles/ocean-theme.css">
+    <link rel="stylesheet" href="../styles/animations.css">
+    
+    <!-- Мета-теги -->
+    <meta name="description" content="Учебный дневник Баскаков Максим - хронология обучения веб-разработке с морской тематикой">
+    <meta name="keywords" content="учебный дневник, веб-разработка, прогресс обучения, морская тема">
+</head>
+<body class="ocean-theme">
+    <!-- Анимированный океанский фон -->
+    <div class="ocean-background">
+        <div class="waves-container">
+            <div class="wave wave-1"></div>
+            <div class="wave wave-2"></div>
+            <div class="wave wave-3"></div>
+            <div class="bubbles-container"></div>
+        </div>
+        <canvas id="liquidCanvas" class="liquid-canvas"></canvas>
+    </div>
+
+    <!-- Свечение за курсором -->
+    <div id="cursorGlow" class="aqua-cursor"></div>
+
+    <!-- Уведомления в морском стиле -->
+    <div id="notificationContainer" class="ocean-notifications"></div>
+
+    <!-- Плавающие частицы -->
+    <div class="floating-particles">
+        <div class="particle bubble-1"></div>
+        <div class="particle bubble-2"></div>
+        <div class="particle bubble-3"></div>
+        <div class="particle seaweed-1"></div>
+        <div class="particle seaweed-2"></div>
+    </div>
+
+    <!-- Skip-link для доступности -->
+    <a class="skip-link ocean-skip" href="#main">Перейти к основному содержимому</a>
+
+    <!-- Основной контейнер с стеклянным эффектом -->
+    <div class="glass-container">
+        <header class="ocean-header">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-center py-3">
+                    <!-- Анимированный логотип с водой -->
+                    <div class="logo-container me-3">
+                        <div class="water-logo">
+                            <svg width="40" height="40" viewBox="0 0 40 40" class="logo-wave">
+                                <path d="M20,5 C25,5 35,10 35,20 C35,30 25,35 20,35 C15,35 5,30 5,20 C5,10 15,5 20,5 Z" 
+                                      fill="url(#waterGradient)"/>
+                                <defs>
+                                    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00b4d8"/>
+                                        <stop offset="50%" stop-color="#0077b6"/>
+                                        <stop offset="100%" stop-color="#03045e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="h3 mb-0 text-glow">Баскаков Максим</h1>
+                </div>
+            </div>
+        </header>
+
+        <!-- Навигация с водным эффектом -->
+        <nav class="navbar navbar-expand-lg ocean-navbar" aria-label="Основная навигация">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold text-glow water-text" href="../index.html">
+                    <i class="bi bi-droplet-half me-2"></i>Portfolio
+                </a>
+                <button class="navbar-toggler ocean-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav"
+                        aria-label="Переключить навигацию">
+                    <span class="navbar-toggler-icon">
+                        <i class="bi bi-water"></i>
+                    </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="../index.html">
+                                <i class="bi bi-house-water me-1"></i>Главная
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="projects.html">
+                                <i class="bi bi-folder-symlink me-1"></i>Проекты
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active water-link" href="diary.html" aria-current="page">
+                                <i class="bi bi-journal-text me-1"></i>Дневник
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link water-link" href="contacts.html">
+                                <i class="bi bi-telephone-outbound me-1"></i>Контакты
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main id="main" class="container-fluid my-5">
+            <!-- Заголовок страницы -->
+            <header class="mb-5 text-center">
+                <h1 class="text-glow mb-3">
+                    <i class="bi bi-journal-code me-2 water-icon"></i>Мой учебный прогресс
+                </h1>
+                <p class="ocean-text lead mb-4">
+                    Хронология моего обучения и развития в веб-разработке
+                </p>
+                
+                <!-- Индикатор прогресса -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-8">
+                        <div class="card ocean-glass aqua-card">
+                            <div class="card-body">
+                                <h3 class="h5 text-glow mb-3 text-center">
+                                    <i class="bi bi-speedometer2 me-2 water-icon"></i>Общий прогресс обучения
+                                </h3>
+                                <div class="water-progress-large mb-3">
+                                    <div class="water-progress-bar-large" data-width="65"></div>
+                                </div>
+                                <div class="d-flex justify-content-between text-glow small">
+                                    <span>Начало пути</span>
+                                    <span>65% завершено</span>
+                                    <span>Эксперт</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="row g-4">
+                <!-- Timeline Section -->
+                <div class="col-lg-8">
+                    <!-- Хронология обучения -->
+                    <div class="card ocean-glass aqua-card mb-4">
+                        <div class="card-body">
+                            <h3 class="card-title h4 text-glow mb-4">
+                                <i class="bi bi-clock-history me-2 water-icon"></i>Хронология обучения
+                            </h3>
+                            
+                            <div class="ocean-timeline" id="timeline">
+                                <!-- Entry 1 -->
+                                <article class="timeline-item mb-4">
+                                    <div class="timeline-content ocean-glass p-4 rounded">
+                                        <div class="d-flex align-items-start">
+                                            <div class="timeline-badge completed me-3">
+                                                <i class="bi bi-check-circle-fill water-icon" style="font-size: 1.5rem;"></i>
+                                            </div>
+                                            <div class="timeline-details flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                                                    <h4 class="text-glow mb-1">Верстка макета сайта</h4>
+                                                    <span class="badge aqua-badge mb-1">Завершено</span>
+                                                </div>
+                                                <p class="ocean-text small mb-2">
+                                                    <i class="bi bi-calendar3 me-1 water-icon"></i>15 октября 2025
+                                                </p>
+                                                <p class="ocean-text mb-3">
+                                                    Освоил основы HTML/CSS, создал первый адаптивный макет сайта. 
+                                                    Изучил семантические теги, работу с Flexbox и CSS Grid.
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <span class="badge ocean-badge">HTML5</span>
+                                                    <span class="badge ocean-badge">CSS3</span>
+                                                    <span class="badge ocean-badge">Flexbox</span>
+                                                    <span class="badge ocean-badge">Grid</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- Entry 2 -->
+                                <article class="timeline-item mb-4">
+                                    <div class="timeline-content ocean-glass p-4 rounded">
+                                        <div class="d-flex align-items-start">
+                                            <div class="timeline-badge completed me-3">
+                                                <i class="bi bi-check-circle-fill water-icon" style="font-size: 1.5rem;"></i>
+                                            </div>
+                                            <div class="timeline-details flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                                                    <h4 class="text-glow mb-1">JavaScript основы</h4>
+                                                    <span class="badge aqua-badge mb-1">Завершено</span>
+                                                </div>
+                                                <p class="ocean-text small mb-2">
+                                                    <i class="bi bi-calendar3 me-1 water-icon"></i>1 ноября 2025
+                                                </p>
+                                                <p class="ocean-text mb-3">
+                                                    Изучил основы JavaScript: переменные, функции, DOM-манипуляции. 
+                                                    Создал интерактивные элементы на сайте.
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <span class="badge ocean-badge">JavaScript</span>
+                                                    <span class="badge ocean-badge">DOM API</span>
+                                                    <span class="badge ocean-badge">Events</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- Entry 3 -->
+                                <article class="timeline-item mb-4">
+                                    <div class="timeline-content ocean-glass p-4 rounded">
+                                        <div class="d-flex align-items-start">
+                                            <div class="timeline-badge in-progress me-3">
+                                                <i class="bi bi-arrow-clockwise water-icon" style="font-size: 1.5rem;"></i>
+                                            </div>
+                                            <div class="timeline-details flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                                                    <h4 class="text-glow mb-1">React разработка</h4>
+                                                    <span class="badge aqua-badge mb-1">В процессе</span>
+                                                </div>
+                                                <p class="ocean-text small mb-2">
+                                                    <i class="bi bi-calendar3 me-1 water-icon"></i>15 ноября 2025
+                                                </p>
+                                                <p class="ocean-text mb-3">
+                                                    Изучаю React.js, компонентный подход, состояние и пропсы. 
+                                                    Разрабатываю SPA приложение для управления задачами.
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <span class="badge ocean-badge">React</span>
+                                                    <span class="badge ocean-badge">Components</span>
+                                                    <span class="badge ocean-badge">Hooks</span>
+                                                    <span class="badge ocean-badge">SPA</span>
+                                                </div>
+                                                <div class="water-progress mt-3">
+                                                    <div class="water-progress-bar" data-width="40"></div>
+                                                </div>
+                                                <div class="d-flex justify-content-between ocean-text small mt-1">
+                                                    <span>40% завершено</span>
+                                                    <span>Осталось 3 недели</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- Entry 4 -->
+                                <article class="timeline-item mb-4">
+                                    <div class="timeline-content ocean-glass p-4 rounded">
+                                        <div class="d-flex align-items-start">
+                                            <div class="timeline-badge planned me-3">
+                                                <i class="bi bi-clock water-icon" style="font-size: 1.5rem;"></i>
+                                            </div>
+                                            <div class="timeline-details flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-start mb-2 flex-wrap">
+                                                    <h4 class="text-glow mb-1">Node.js и Backend</h4>
+                                                    <span class="badge ocean-badge mb-1">Запланировано</span>
+                                                </div>
+                                                <p class="ocean-text small mb-2">
+                                                    <i class="bi bi-calendar3 me-1 water-icon"></i>Декабрь 2025
+                                                </p>
+                                                <p class="ocean-text mb-3">
+                                                    Планирую изучить серверную разработку на Node.js, Express, 
+                                                    работу с базами данных и REST API.
+                                                </p>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <span class="badge ocean-badge">Node.js</span>
+                                                    <span class="badge ocean-badge">Express</span>
+                                                    <span class="badge ocean-badge">MongoDB</span>
+                                                    <span class="badge ocean-badge">REST API</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button class="btn aqua-btn" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                                    <i class="bi bi-plus-circle me-2"></i>Добавить новую запись
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Статистика обучения -->
+                    <div class="card ocean-glass aqua-card">
+                        <div class="card-body">
+                            <h4 class="text-glow mb-4">
+                                <i class="bi bi-graph-up me-2 water-icon"></i>Статистика обучения
+                            </h4>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="stat-item ocean-glass p-3 rounded text-center h-100">
+                                        <i class="bi bi-book water-icon stats-icon"></i>
+                                        <h3 class="text-glow mt-2 mb-1 counter" data-target="15">0</h3>
+                                        <p class="ocean-text mb-0 small">Пройденных уроков</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stat-item ocean-glass p-3 rounded text-center h-100">
+                                        <i class="bi bi-clock water-icon stats-icon"></i>
+                                        <h3 class="text-glow mt-2 mb-1 counter" data-target="50">0</h3>
+                                        <p class="ocean-text mb-0 small">Часов практики</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stat-item ocean-glass p-3 rounded text-center h-100">
+                                        <i class="bi bi-check-circle water-icon stats-icon"></i>
+                                        <h3 class="text-glow mt-2 mb-1 counter" data-target="8">0</h3>
+                                        <p class="ocean-text mb-0 small">Завершенных проектов</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="stat-item ocean-glass p-3 rounded text-center h-100">
+                                        <i class="bi bi-code-slash water-icon stats-icon"></i>
+                                        <h3 class="text-glow mt-2 mb-1 counter" data-target="12">0</h3>
+                                        <p class="ocean-text mb-0 small">Изученных технологий</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Текущие цели -->
+                    <div class="card ocean-glass aqua-card mb-4">
+                        <div class="card-body">
+                            <h4 class="text-glow mb-3">
+                                <i class="bi bi-bullseye me-2 water-icon"></i>Текущие цели
+                            </h4>
+                            <div class="goals-list">
+                                <div class="goal-item mb-3 p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-check2-circle water-icon me-2"></i>
+                                        <h5 class="text-glow mb-0 flex-grow-1">Изучить React Hooks</h5>
+                                    </div>
+                                    <div class="water-progress-small">
+                                        <div class="water-progress-bar" data-width="60"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between ocean-text small mt-1">
+                                        <span>60%</span>
+                                        <span>2 недели</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="goal-item mb-3 p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-check2-circle water-icon me-2"></i>
+                                        <h5 class="text-glow mb-0 flex-grow-1">Создать SPA приложение</h5>
+                                    </div>
+                                    <div class="water-progress-small">
+                                        <div class="water-progress-bar" data-width="30"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between ocean-text small mt-1">
+                                        <span>30%</span>
+                                        <span>1 месяц</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="goal-item p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-check2-circle water-icon me-2"></i>
+                                        <h5 class="text-glow mb-0 flex-grow-1">Освоить TypeScript</h5>
+                                    </div>
+                                    <div class="water-progress-small">
+                                        <div class="water-progress-bar" data-width="10"></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between ocean-text small mt-1">
+                                        <span>10%</span>
+                                        <span>2 месяца</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Последние достижения -->
+                    <div class="card ocean-glass aqua-card mb-4">
+                        <div class="card-body">
+                            <h4 class="text-glow mb-3">
+                                <i class="bi bi-trophy me-2 water-icon"></i>Последние достижения
+                            </h4>
+                            <div class="achievements-list">
+                                <div class="achievement-item mb-3 p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-award-fill water-icon me-2 mt-1"></i>
+                                        <div>
+                                            <h6 class="text-glow mb-1">Первое React приложение</h6>
+                                            <p class="ocean-text small mb-0">Создал todo-приложение с использованием хуков</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="achievement-item mb-3 p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-award-fill water-icon me-2 mt-1"></i>
+                                        <div>
+                                            <h6 class="text-glow mb-1">Адаптивная верстка</h6>
+                                            <p class="ocean-text small mb-0">Освоил создание responsive дизайнов</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="achievement-item p-3 rounded ocean-glass">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-award-fill water-icon me-2 mt-1"></i>
+                                        <div>
+                                            <h6 class="text-glow mb-1">Git мастер</h6>
+                                            <p class="ocean-text small mb-0">Научился эффективно использовать Git</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Быстрая навигация -->
+                    <div class="card ocean-glass aqua-card">
+                        <div class="card-body">
+                            <h4 class="text-glow mb-3">
+                                <i class="bi bi-lightning me-2 water-icon"></i>Быстрые действия
+                            </h4>
+                            <div class="d-grid gap-2">
+                                <button class="btn ocean-outline-btn" onclick="scrollToTimeline()">
+                                    <i class="bi bi-arrow-down me-2"></i>К хронологии
+                                </button>
+                                <button class="btn ocean-outline-btn" data-bs-toggle="modal" data-bs-target="#addEntryModal">
+                                    <i class="bi bi-plus me-2"></i>Новая запись
+                                </button>
+                                <a href="projects.html" class="btn ocean-outline-btn">
+                                    <i class="bi bi-folder me-2"></i>Мои проекты
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="ocean-footer text-center py-4">
+            <div class="container-fluid">
+                <p class="mb-2 text-glow">© 2025 Баскаков Максим | ЭФБО-06-24</p>
+                <p class="small mb-0 ocean-text">
+                    <i class="bi bi-droplet-fill text-info me-1"></i>
+                    Сделано с любовью к океану и коду
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно добавления записи -->
+    <div class="modal fade" id="addEntryModal" tabindex="-1" aria-labelledby="addEntryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content ocean-glass aqua-card">
+                <div class="modal-header ocean-border">
+                    <h5 class="modal-title text-glow" id="addEntryModalLabel">
+                        <i class="bi bi-plus-circle me-2 water-icon"></i>Добавить новую запись
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="diaryEntryForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="entryTitle" class="form-label text-glow">
+                                        <i class="bi bi-card-heading me-2 water-icon"></i>Заголовок
+                                    </label>
+                                    <input type="text" class="form-control ocean-input" id="entryTitle" 
+                                           placeholder="Название этапа обучения" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="entryDate" class="form-label text-glow">
+                                        <i class="bi bi-calendar me-2 water-icon"></i>Дата
+                                    </label>
+                                    <input type="date" class="form-control ocean-input" id="entryDate" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="entryDescription" class="form-label text-glow">
+                                        <i class="bi bi-text-paragraph me-2 water-icon"></i>Описание
+                                    </label>
+                                    <textarea class="form-control ocean-textarea" id="entryDescription" 
+                                              rows="4" placeholder="Опишите ваш прогресс..." required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label text-glow">
+                                        <i class="bi bi-tags me-2 water-icon"></i>Технологии
+                                    </label>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input ocean-check" type="checkbox" id="techHTML" value="HTML/CSS">
+                                            <label class="form-check-label ocean-text" for="techHTML">HTML/CSS</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input ocean-check" type="checkbox" id="techJS" value="JavaScript">
+                                            <label class="form-check-label ocean-text" for="techJS">JavaScript</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input ocean-check" type="checkbox" id="techReact" value="React">
+                                            <label class="form-check-label ocean-text" for="techReact">React</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input ocean-check" type="checkbox" id="techNode" value="Node.js">
+                                            <label class="form-check-label ocean-text" for="techNode">Node.js</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input ocean-check" type="checkbox" id="techBootstrap" value="Bootstrap">
+                                            <label class="form-check-label ocean-text" for="techBootstrap">Bootstrap</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="entryStatus" class="form-label text-glow">
+                                        <i class="bi bi-clock me-2 water-icon"></i>Статус
+                                    </label>
+                                    <select class="form-select ocean-select" id="entryStatus">
+                                        <option value="planned">Запланировано</option>
+                                        <option value="in-progress">В процессе</option>
+                                        <option value="completed">Завершено</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12" id="progressSection" style="display: none;">
+                                <div class="form-group">
+                                    <label for="entryProgress" class="form-label text-glow">
+                                        <i class="bi bi-graph-up me-2 water-icon"></i>Прогресс
+                                    </label>
+                                    <input type="range" class="form-range ocean-range" id="entryProgress" min="0" max="100" value="0">
+                                    <div class="d-flex justify-content-between ocean-text small mt-2">
+                                        <span>0%</span>
+                                        <span id="progressValue">0%</span>
+                                        <span>100%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer ocean-border">
+                    <button type="button" class="btn ocean-outline-btn" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>Отмена
+                    </button>
+                    <button type="button" class="btn aqua-btn" id="saveEntryBtn">
+                        <i class="bi bi-check-circle me-2"></i>Сохранить запись
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/scripts/bootstrap.bundle.min.js" defer></script>
+    <script src="../scripts/aqua-engine.js" defer></script>
+    <script src="../scripts/liquid-canvas.js" defer></script>
+    <script src="../scripts/water-animations.js" defer></script>
+    <script src="../scripts/ocean-interactions.js" defer></script>
+    <script src="../scripts/notifications.js" defer></script>
+    <script src="../scripts/ocean-diary.js" defer></script>
+    
+    <!-- Инициализация -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация водной анимации
+            if (typeof AquaEngine !== 'undefined') {
+                AquaEngine.init();
+            }
+            
+            // Инициализация счетчиков
+            initCounters();
+            
+            // Инициализация прогресс-баров
+            initProgressBars();
+            
+            // Инициализация взаимодействий с дневником
+            initDiaryInteractions();
+            
+            // Инициализация модального окна
+            initAddEntryModal();
+        });
+        
+        function initAddEntryModal() {
+            const modal = document.getElementById('addEntryModal');
+            const statusSelect = document.getElementById('entryStatus');
+            const progressSection = document.getElementById('progressSection');
+            const progressRange = document.getElementById('entryProgress');
+            const progressValue = document.getElementById('progressValue');
+            
+            if (!modal) {
+                console.error('Modal element not found');
+                return;
+            }
+            
+            // Обработчик изменения статуса
+            if (statusSelect && progressSection) {
+                statusSelect.addEventListener('change', function() {
+                    if (this.value === 'in-progress') {
+                        progressSection.style.display = 'block';
+                        // Анимация появления
+                        progressSection.style.animation = 'fadeInUp 0.4s ease';
+                    } else {
+                        progressSection.style.animation = 'fadeOut 0.3s ease';
+                        setTimeout(() => {
+                            progressSection.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // Обработчик для range input
+            if (progressRange && progressValue) {
+                progressRange.addEventListener('input', function() {
+                    progressValue.textContent = this.value + '%';
+                    
+                    // Водный эффект при изменении прогресса
+                    if (window.WaterUtils) {
+                        const rect = progressRange.getBoundingClientRect();
+                        window.WaterUtils.createSplash(
+                            rect.left + (rect.width * this.value / 100),
+                            rect.top,
+                            0.1
+                        );
+                    }
+                });
+            }
+            
+            // Обработчик открытия модального окна
+            modal.addEventListener('show.bs.modal', function() {
+                // Устанавливаем текущую дату
+                const dateInput = document.getElementById('entryDate');
+                if (dateInput) {
+                    const today = new Date().toISOString().split('T')[0];
+                    dateInput.value = today;
+                }
+                
+                // Сбрасываем прогресс секцию
+                if (progressSection) {
+                    progressSection.style.display = 'none';
+                }
+                
+                // Водный эффект при открытии
+                if (window.AquaEngine) {
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            window.AquaEngine.createSplash(
+                                window.innerWidth / 2 + (Math.random() - 0.5) * 300,
+                                window.innerHeight / 2 + (Math.random() - 0.5) * 200,
+                                0.2
+                            );
+                        }, i * 100);
+                    }
+                }
+            });
+            
+            // Обработчик закрытия модального окна
+            modal.addEventListener('hidden.bs.modal', function() {
+                // Сбрасываем форму
+                const form = document.getElementById('diaryEntryForm');
+                if (form) {
+                    form.reset();
+                }
+            });
+        }
+        
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.innerText = Math.ceil(current);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+        
+        function initProgressBars() {
+            const progressBars = document.querySelectorAll('.water-progress-bar');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 500);
+            });
+            
+            const largeBars = document.querySelectorAll('.water-progress-bar-large');
+            largeBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 800);
+            });
+        }
+        
+        function initDiaryInteractions() {
+            // Эффекты для timeline items
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+            
+            // Эффекты для goal items
+            const goalItems = document.querySelectorAll('.goal-item');
+            goalItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.background = 'rgba(0, 255, 234, 0.1)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.background = '';
+                });
+            });
+        }
+        
+        function scrollToTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (timeline) {
+                timeline.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Обработчик сохранения записи
+        document.getElementById('saveEntryBtn')?.addEventListener('click', function() {
+            const title = document.getElementById('entryTitle')?.value;
+            const date = document.getElementById('entryDate')?.value;
+            const description = document.getElementById('entryDescription')?.value;
+            
+            if (!title || !date || !description) {
+                if (window.OceanNotifications) {
+                    window.OceanNotifications.error('Пожалуйста, заполните все обязательные поля');
+                }
+                return;
+            }
+            
+            // Показываем индикатор загрузки
+            this.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Сохранение...';
+            this.disabled = true;
+            
+            // Имитация сохранения
+            setTimeout(() => {
+                if (window.OceanNotifications) {
+                    window.OceanNotifications.success('Запись успешно добавлена в дневник!');
+                }
+                
+                // Восстанавливаем кнопку
+                this.innerHTML = '<i class="bi bi-check-circle me-2"></i>Сохранить запись';
+                this.disabled = false;
+                
+                // Закрываем модальное окно
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addEntryModal'));
+                if (modal) {
+                    modal.hide();
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
