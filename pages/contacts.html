@@ -16,6 +16,9 @@
     <!-- Основные стили морской темы -->
     <link rel="stylesheet" href="../styles/ocean-theme.css">
     <link rel="stylesheet" href="../styles/animations.css">
+
+    <!-- Иконка сайта -->
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     
     <!-- Мета-теги -->
     <meta name="description" content="Свяжитесь с Баскаковым Максимом - веб-разработчиком. Форма обратной связи с морской тематикой и водными эффектами">
@@ -30,7 +33,7 @@
             <div class="wave wave-3"></div>
             <div class="bubbles-container"></div>
         </div>
-        nvas id="liquidCanvas"" class="liquid-canvas"></canvas>
+        <canvas id="liquidCanvas"" class="liquid-canvas"></canvas>
     </div>
 
     <!-- Свечение за курсором -->
@@ -443,7 +446,7 @@
     </div>
 
     <!-- Скрипты -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/scripts/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="../scripts/aqua-engine.js" defer></script>
     <script src="../scripts/liquid-canvas.js" defer></script>
     <script src="../scripts/water-animations.js" defer></script>
@@ -455,9 +458,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация водной анимации
-            if (typeof AquaEngine !== 'undefined') {
-                AquaEngine.init();
-            }
+            if (window.AquaEngine && typeof window.AquaEngine.init === 'function') {
+            window.AquaEngine.init();
+            console.log('AquaEngine инициализирован из contacts.html');
+        } else {
+            console.warn('AquaEngine не готов, эффекты отключены');
+        }
             
             // Инициализация счетчика символов
             initMessageCounter();
