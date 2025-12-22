@@ -572,17 +572,13 @@
         });
 
         function initWaterEffects() {
-            // Инициализация водного движка если он доступен
-            if (typeof AquaEngine !== 'undefined') {
-                AquaEngine.init();
-                console.log('AquaEngine инициализирован');
-            }
-            
-            // Инициализация жидкого канваса
-            if (typeof LiquidCanvas !== 'undefined') {
-                LiquidCanvas.init();
-                console.log('LiquidCanvas инициализирован');
-            }
+        // Инициализация водного движка, если глобальный экземпляр создан
+        if (window.AquaEngine && typeof window.AquaEngine.init === 'function') {
+            window.AquaEngine.init();
+            console.log('AquaEngine инициализирован из projects.html');
+        } else {
+            console.warn('AquaEngine не готов, эффекты отключены');
+        }
         }
 
         function initCursorEffects() {
